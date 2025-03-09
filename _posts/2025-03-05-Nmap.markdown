@@ -8,7 +8,7 @@ description: A detailed cheatsheet for using Nmap in penetration testing.
 
 # Network Enumeration with Nmap
 
-![](Image\image.png)
+![](Image/image.png)
 
 ### This post covers everything I have learnt about using the nmap tool for scanning networks in the "Network enumeration with Nmap" module for HackTheBox's CPTS certification. I've covered each flag and its description and sample usage. 
 
