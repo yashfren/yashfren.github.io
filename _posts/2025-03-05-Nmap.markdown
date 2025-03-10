@@ -51,133 +51,133 @@ description: A detailed cheatsheet for using Nmap in penetration testing.
 
 ## Example Usage
 ### Host Discovery
-Scan single IP
-```
+Scan single IP.
+```bash
 sudo nmap <IP>  
 ```
-Scan IP Range. -sn will not scan every port
-```
+Scan IP Range. -sn will not scan every port.
+```bash
 sudo nmap 10.129.2.0/24 -sn 
 ```
-Scan list of IPs from list using -iL flag
-```
+Scan list of IPs from list using -iL flag.
+```bash
 sudo nmap -sn -iL hostlist.txt
 ```
-Scan list of IPs
-```
+Scan list of IPs.
+```bash
 sudo nmap -sn <IP1> <IP2> <IP3>
 ```
-Scan range of consecutive IPs 
-```
+Scan range of consecutive IPs.
+```bash
 sudo nmap -sn 10.129.2.18-20
 ```
 ### Port Scanning
-scans top 10 ports, --top-ports flag can be used with other numbers like --top-ports=1000 will scan top 1000 ports
-```
+scans top 10 ports, --top-ports flag can be used with other numbers like --top-ports=1000 will scan top 1000 ports.
+```bash
 sudo nmap <IP> --top-ports=10 
 ```
 Scan a particular port. Trace packets with --packet-trace. -Pn will treat the host as alive. -n flag will disable DNS resolution. --disable-arp-ping as the flag suggests, disables ARP ping.
-```
+```bash
 sudo nmap <IP> -p <Port number> --packet-trace -Pn -n --disable-arp-ping
 ```
-Scan all 65535 ports
-```
+Scan all 65535 ports.
+```bash
 sudo nmap <IP> -p-
 ```
-Scan a top 100 ports
-```
+Scan a top 100 ports.
+```bash
 sudo nmap <IP> -F
 ```
-Scan a bunch of ports
-```
+Scan a bunch of ports.
+```bash
 sudo nmap <IP> -p21,80,...
 ```
 ### Additional enumeration / Service Enumeration
--sC uses default scripts against the host. -sV uses scripts to enumerate service versions
-```
+-sC uses default scripts against the host. -sV uses scripts to enumerate service versions.
+```bash
 sudo nmap <IP> -sC -sV
 ```
 -sS sends SYN packets. Runs as default when running with sudo. 
-```
+```bash
 sudo nmap <IP> -sS
 ```
 -sT stands for TCP connect scan. Performs complete three way handshake. Intrusive but accurate.
-```
+```bash
 sudo nmap <IP> -sT
 ```
--sA stands for ACK scan
-```
+-sA stands for ACK scan.
+```bash
 sudo nmap -sA <IP> 
 ```
 ### NSE and using scripts
-Locate scripts
-```
+Locate scripts.
+```bash
 locate *.nse
 ```
-Use default scripts
-```
+Use default scripts.
+```bash
 sudo nmap <target> -sC
 ```
-Run category of scripts against host
-```
+Run category of scripts against host.
+```bash
 sudo nmap <target> --script <category>
 ```
-Run specific scripts against host
-```
+Run specific scripts against host.
+```bash
 sudo nmap <target> --script <script-name>,<script-name>,...
 ```
--A performs service detection, OS detection, traceroute and uses defaults scripts
-```
+-A performs service detection, OS detection, traceroute and uses defaults scripts.
+```bash
 sudo nmap <IP> -A
 ```
---script-args can be used to pass arguments to scripts, refer to https://0xdf.gitlab.io/2020/04/08/htb-lame-more.html
-```
+--script-args can be used to pass arguments to scripts, refer to https://0xdf.gitlab.io/2020/04/08/htb-lame-more.html.
+```bash
 nmap -p <port> <IP> --script <script name> --script-args="<arguments>"
 ```
 ### Optimising scans
--T<0-5> 0 being stealthiest, slowest and most accurate and 5 being fastest, noisiest and least accurate
-```
+-T<0-5> 0 being stealthiest, slowest and most accurate and 5 being fastest, noisiest and least accurate.
+```bash
 sudo nmap -sC -sV <IP> -T<0-5>
 ```
---initial-rtt-timeout <time> Sets the initial RTT (Round Trip Time) timeout for probes. Makes scans faster
-```
+--initial-rtt-timeout <time> Sets the initial RTT (Round Trip Time) timeout for probes. Makes scans faster.
+```bash
 sudo nmap <IP> --initial-rtt-timeout 50ms
 ```
 --max-rtt-timeout <time> Sets the maximum RTT timeout for probes.
-```
+```bash
 sudo nmap <IP> --max-rtt-timeout 100ms
 ```
---max-retries <number> Sets the maximum number of retries for unanswered probes
-```
+--max-retries <number> Sets the maximum number of retries for unanswered probes.
+```bash
 sudo nmap <IP> --max-retries 0
 ```
 -min-rate <packets> Forces Nmap to send at least the specified number of packets per second.
-```
+```bash
 sudo nmap <IP> --min-rate 300
 ```
 ### Firewall and IDS/IPS Evasion
--n (Disable DNS Resolution) Prevents Nmap from resolving hostnames to IP addresses
-```
+-n (Disable DNS Resolution) Prevents Nmap from resolving hostnames to IP addresses.
+```bash
 sudo nmap <IP> -n
 ```
---disable-arp-ping (Disable ARP Ping)
-```
+--disable-arp-ping (Disable ARP Ping).
+```bash
 sudo nmap <IP> -p50000 -sS -Pn -n --disable-arp-ping
 ```
---packet-trace (Show Packet Details)
-```
+--packet-trace (Show Packet Details).
+```bash
 sudo nmap <IP> -p50000 -sS -Pn -n --disable-arp-ping --packet-trace
 ```
--D RND:5 (Use Random Decoys)
-```
+-D RND:5 (Use Random Decoys).
+```bash
 sudo nmap <IP> -D RND:5
 ```
--S <spoofed-IP> (Spoof Source IP)
-```
+-S <spoofed-IP> (Spoof Source IP).
+```bash
 sudo nmap <IP> -O -S <Spoofed IP> -e <Interface>
 ```
---source-port <port> (Set Source Port)
-```
+--source-port <port> (Set Source Port).
+```bash
 sudo nmap <IP> -p50000 -sS -Pn -n --disable-arp-ping --packet-trace --source-port 53
 ```
 
@@ -243,4 +243,4 @@ By default, Nmap performs reverse DNS lookups on scanned IPs. This can slow scan
 - Spoofing the source port can help bypass such restrictions.
 
 
-Note that this does not cover every feature of nmap but is based on the hackthebox academy module. I will try adding content to it if I learn some new stuff. In case of any suggestions for improvement, feel free to DM me on twitter.
+Note that this does not cover every feature of nmap but this post is based on the hackthebox academy module. I will try adding more content to it if I learn some new stuff. In case of any suggestions for improvement, feel free to DM me on twitter.
