@@ -69,7 +69,7 @@ e. `pwsh` on macOS and linux call the powershell core which is a platform agnost
 
 - Download-Execute Cradles
 
-a. A Download-Execute Cradle is a one-liner that downloads a remote PowerShell script and executes it directly in memory using `iex`
+A Download-Execute Cradle is a one-liner that downloads a remote PowerShell script and executes it directly in memory using `iex`
 
 Example:
 
@@ -104,14 +104,14 @@ It does not block or log anything - completely bypassable.
 
 - AMSI, Logging, and CLM Bypass Tools
 
-1. Invisi-Shell
+- Invisi-Shell
 
 Uses CLR (Common Language Runtime) Profiler API to hook and patch `System.Management.Automation.dll` and `System.Core.dll`.
 Disables logging like Script Block Logging and Transcription.
 Runs via a few `.bat` files and profiler environment variables.
 OPSEC caution: it’s signatured; must be recompiled and obfuscated.
 
-2. Payload Fingerprint Testing & Obfuscation
+- Payload Fingerprint Testing & Obfuscation
 
 a. AmsiTrigger
 
