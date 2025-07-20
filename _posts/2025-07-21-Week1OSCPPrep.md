@@ -1,7 +1,7 @@
 ---
 title: Week 1 of my OSCP preparation 
 date: 2025-07-21 1:00:00 + 05:30
-categories: [Enumeration]
+categories: [OSCP Prep]
 tags: [oscp, sqli, ad]    # TAG names should always be lowercase
 description: Where have I been? Update on the CPTS journey, and the OSCP grind
 ---
