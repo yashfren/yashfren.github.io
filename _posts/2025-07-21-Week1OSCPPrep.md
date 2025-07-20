@@ -6,7 +6,7 @@ tags: [oscp, sqli, ad]    # TAG names should always be lowercase
 description: Where have I been? Update on the CPTS journey, and the OSCP grind
 ---
 # Week 1 of my OSCP preparation
-![](/assets/images\futur___dusk_by_khurt_x_kate_dimqihb-pre.jpg)
+![](/assets/images/futur___dusk_by_khurt_x_kate_dimqihb-pre.jpg)
 ### TLDR
 If you want to skip straight to the technical learning portion of this week, just scroll down to the `OSCP Prep` , as I will be starting this post with an update.
 
