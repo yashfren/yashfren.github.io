@@ -3,7 +3,7 @@ title: Week 1 of my OSCP preparation
 date: 2025-07-21 1:00:00 + 05:30
 categories: [OSCP Prep]
 tags: [oscp, sqli, ad]    # TAG names should always be lowercase
-description: Where have I been? Update on the CPTS journey, and the OSCP grind
+description: Where have I been? Update on the CPTS journey, and the start of the OSCP journey
 ---
 # Week 1 of my OSCP preparation
 ![](/assets/images/futur___dusk_by_khurt_x_kate_dimqihb-pre.jpg)
@@ -55,15 +55,19 @@ I am reading this blog - [PowerShell ♥ the Blue Team](https://devblogs.microso
 
 Besides this, I learnt the following things this week which I found to be quite interesting. 
 
-1. PowerShell Internals
+- PowerShell Internals
 
 a. PowerShell's real engine is `System.Management.Automation.dll`, not `powershell.exe`.
+
 b. `powershell.exe` is just the CLI interface that loads the DLL and starts a REPL (read-eval-print loop).
+
 c. This separation allows attackers to bypass detections by directly invoking the DLL from C# or other .NET code.
+
 d. Scripts can be executed in-memory, skipping `powershell.exe` entirely, which helps avoid logging.
+
 e. `pwsh` on macOS and linux call the powershell core which is a platform agnostic implementation of powershell.
 
-2. Download-Execute Cradles
+- Download-Execute Cradles
 
 a. A Download-Execute Cradle is a one-liner that downloads a remote PowerShell script and executes it directly in memory using `iex`
 
@@ -76,7 +80,7 @@ Example:
  The full line is the cradle - `iex` is the executor within it.
 
 
-3. PowerShell Detection Mechanisms
+- PowerShell Detection Mechanisms
 
 | Feature                               | Function                                                                     |
 | ------------------------------------- | ---------------------------------------------------------------------------- |
@@ -87,7 +91,7 @@ Example:
 
 All of the above can be bypassed by red teamers with the right tools and techniques.
 
-4. Execution Policy != Security controls
+- Execution Policy != Security controls
 
 PowerShell Execution Policy is not a security feature - it just prevents accidental script execution.
 Common policies: `Restricted`, `RemoteSigned`, `Unrestricted`, `Bypass`.
@@ -98,29 +102,29 @@ You can bypass it without admin using:
    `-EncodedCommand` for base64 payloads
 It does not block or log anything - completely bypassable.
 
-5. AMSI, Logging, and CLM Bypass Tools
+- AMSI, Logging, and CLM Bypass Tools
 
-a. Invisi-Shell
+1. Invisi-Shell
 
 Uses CLR (Common Language Runtime) Profiler API to hook and patch `System.Management.Automation.dll` and `System.Core.dll`.
 Disables logging like Script Block Logging and Transcription.
 Runs via a few `.bat` files and profiler environment variables.
 OPSEC caution: it’s signatured; must be recompiled and obfuscated.
 
-b. Payload Fingerprint Testing & Obfuscation
+2. Payload Fingerprint Testing & Obfuscation
 
-- AmsiTrigger
+a. AmsiTrigger
 
 Finds which lines or tokens in your script are triggering AMSI.
 Helps in debugging payloads and identifying sensitive strings.
 
-- DefenderCheck
+b. DefenderCheck
 
 Tests whether your script or EXE gets flagged by Windows Defender.
 Lets you verify stealth before delivery.
 Can even be used to check if DefenderCheck itself is getting detected (meta!).
 
-6. Invoke-Obfuscation
+- Invoke-Obfuscation
 
 Tool to obfuscate PowerShell scripts using Token reordering, AST manipulation, String encoding.
 Used to defeat AMSI/AV/EDR signatures.
