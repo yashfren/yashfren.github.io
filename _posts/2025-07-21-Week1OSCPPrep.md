@@ -42,7 +42,7 @@ Also, I read these 10 posts/reports sharing how SQL injections were discovered i
 7. [https://hackerone.com/reports/1044698](https://hackerone.com/reports/1044698) This hackerone disclosed report shows how a researcher found a time based SQLi and XSS (need to learn XSS) in an api endpoint.
 8. [https://hackerone.com/reports/1525200](https://hackerone.com/reports/1525200) This report was about CVE-2021-38159 which was SQLi in MOVEit Transfer. Detailed report - https://blog.viettelcybersecurity.com/moveit-transfer-cve/
 9. [https://hackerone.com/reports/2051931](https://hackerone.com/reports/2051931) This report reveals a Blind SQLi on an api in in-drive.
-10. [https://hackerone.com/reports/273946] (https://hackerone.com/reports/273946) Again, last but the best of all reports, this was a vulnerability in a WordPress plugin which the researcher exploited to dump the credentials. This one was my favorite of all 4 hacktivity reports and I recommend everyone should read it.
+10. [https://hackerone.com/reports/273946](https://hackerone.com/reports/273946) Again, last but the best of all reports, this was a vulnerability in a WordPress plugin which the researcher exploited to dump the credentials. This one was my favorite of all 4 hacktivity reports and I recommend everyone should read it.
 
 Besides these I also read about OAST - [https://portswigger.net/burp/application-security-testing/oast](https://portswigger.net/burp/application-security-testing/oast)
 I don't think I understand this totally as it includes usage of collaborator which is a pro feature but I have a basic idea of how out of band testing works.
