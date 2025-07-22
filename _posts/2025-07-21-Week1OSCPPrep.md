@@ -40,7 +40,7 @@ Also, I read these 10 posts/reports sharing how SQL injections were discovered i
 5. [https://medium.com/%400x3adly/from-sql-injection-to-rce-leveraging-vulnerability-for-maximum-impact-2fb356907eed](https://medium.com/%400x3adly/from-sql-injection-to-rce-leveraging-vulnerability-for-maximum-impact-2fb356907eed) - This blog covers popular RCE methods using SQLi, from `load_file()` to `xp_cmdshell` and os shell using sqlmap. UDFs and PostgreSQL extensions were new methods for me. In fact, I think I need to read about them in detail as I haven't understood them properly.
 6. [https://infosecwriteups.com/how-i-found-multiple-sql-injections-in-5-minutes-in-bug-bounty-40155964c498](https://infosecwriteups.com/how-i-found-multiple-sql-injections-in-5-minutes-in-bug-bounty-40155964c498) - This blog was about finding SQL injections in hidden parameters. I think this blog and the one with the `cookieConsent` parameter are most interesting blogs I've read.
 7. [https://hackerone.com/reports/1044698](https://hackerone.com/reports/1044698) This hackerone disclosed report shows how a researcher found a time based SQLi and XSS (need to learn XSS) in an api endpoint.
-8. [https://hackerone.com/reports/1525200](https://hackerone.com/reports/1525200) This report was about CVE-2021-38159 which was SQLi in MOVEit Transfer. Detailed report - https://blog.viettelcybersecurity.com/moveit-transfer-cve/
+8. [https://hackerone.com/reports/1525200](https://hackerone.com/reports/1525200) This report was about CVE-2021-38159 which was SQLi in MOVEit Transfer. Detailed report - [https://blog.viettelcybersecurity.com/moveit-transfer-cve/](https://blog.viettelcybersecurity.com/moveit-transfer-cve/)
 9. [https://hackerone.com/reports/2051931](https://hackerone.com/reports/2051931) This report reveals a Blind SQLi on an api in in-drive.
 10. [https://hackerone.com/reports/273946](https://hackerone.com/reports/273946) Again, last but the best of all reports, this was a vulnerability in a WordPress plugin which the researcher exploited to dump the credentials. This one was my favorite of all 4 hacktivity reports and I recommend everyone should read it.
 
@@ -140,4 +140,4 @@ My goal for next week is to finish a large part of AD and try to learn and finis
 
 I am not totally satisfied with this week's progress as I was busy with college and couldn't dedicate as much time to it as I could have otherwise. I hope to achieve next week's goals. If you read it this far, thank you for reading and feel free to connect on twitter and linkedin if you don't already. 
 
-Art I used - https://www.deviantart.com/khurt-x-kate/art/Futur-Dusk-1126579727
+Art I used - [https://www.deviantart.com/khurt-x-kate/art/Futur-Dusk-1126579727](https://www.deviantart.com/khurt-x-kate/art/Futur-Dusk-1126579727)
