@@ -122,4 +122,5 @@ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 \
 Use these in the exam. Precompiled binaries from GitHub releases didn’t work for me.
 
 3. **Double pivot was unstable**
+   
    No fix for this. I gave up after getting 12 flags.
