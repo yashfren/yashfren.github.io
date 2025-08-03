@@ -1,6 +1,6 @@
 ---
 title: My CPTS experience - tips and tricks 
-date: 2025-07-29 18:00:00 +05:30
+date: 2025-08-03 18:00:00 +05:30
 categories: [CPTS]
 tags: [cpts]    # TAG names should always be lowercase
 description: My journey from beginner to passing HTB's CPTS certification, with practical exam tips and lessons learned.
