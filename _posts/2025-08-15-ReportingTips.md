@@ -238,7 +238,7 @@ Now I will write the details for a single finding and show how I did it.
 
 First I pasted the steps in GPT and asked it to generate each of the components for the finding. 
 
-![It generated the Overview and Impact first](image.png)
+![It generated the Overview and Impact first](/assets/images/CPTS/findings3.png)
 
 It had recommended a different CWE, `CWE-94: Improper Control of Generation of Code (‘Code Injection’)` but since we are using some outdated software in our example, I asked it for another CWE and it came up with `CWE-1104: Use of Unmaintained Third Party Components` which seems the best to me.
 
