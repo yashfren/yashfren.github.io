@@ -14,10 +14,13 @@ I recently passed the CPTS by HackTheBox. I got at least 50–100 DMs asking for
 
 Here’s the structure I’m going to follow (based on the questions I received). Feel free to jump to whatever part you’re interested in. It’s structured this way so I don’t waste your time:
 
-- 1. My journey: 0 to CPTS (Skip this if you're just here for exam tips)
-- 2. Tips I received from friends and people online - and how accurate they really are (important)
-- 3. Additional learning materials I used (spoiler: not many) and preparation tips
-- 4. Issues I faced while preparing and during the exam (again, important)
+1. My journey: 0 to CPTS (Skip this if you're just here for exam tips)
+
+2. Tips I received from friends and people online - and how accurate they really are (important)
+
+3. Additional learning materials I used (spoiler: not many) and preparation tips
+
+4. Issues I faced while preparing and during the exam (again, important)
 
 ---
 
