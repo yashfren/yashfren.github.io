@@ -1,6 +1,6 @@
 ---
 title: A detailed guide to Reporting for the CPTS with sysreptor
-date: 2025-08-03 18:00:00 +05:30
+date: 2025-08-15 18:00:00 +05:30
 categories: [CPTS]
 tags: [cpts]    # TAG names should always be lowercase
 description: A step by step guide of how I approached reporting for CPTS and passed in the first attempt
