@@ -8,9 +8,9 @@ description: A step by step guide of how I approached reporting for CPTS and pas
 
 # Introduction
 
-I am writing this guide because at least 3 people (this week) asked me about how to approach report writing as they failed their first attempt despite having 12 or more flags. While I cannot assist everyone by going through their reports and pointing out their errors (It is time consuming plus might be considered as cheating), I believe writing this guide will help everyone. Note that before going through this blog, 1. go through the report writing module on the CPTS path at least once so you have an idea of what I am talking about and 2. Read [this blog by BRM titled - HTB CPTS Reporting: The Easy Way](https://www.brunorochamoura.com/posts/cpts-report/).
+I am writing this guide because at least 3 people (this week) asked me about how to approach report writing as they failed their first attempt despite having 12 or more flags. While I cannot assist everyone by going through their reports and pointing out their errors (It is time consuming plus it might be considered as cheating), I believe writing this guide will help everyone. Note that before going through this blog, 1. go through the report writing module on the CPTS path at least once so you have an idea of what I am talking about and 2. Read [this blog by BRM titled - HTB CPTS Reporting: The Easy Way](https://www.brunorochamoura.com/posts/cpts-report/).
 
-I will be writing this blog with the assumptions that 1. The reader doesn't know markdown and 2. The reader doesn't know how to use sysreptor (I didn't as well, learnt on the exam lol). I highly recommend using Sysreptor, as it has a default templates for all the HTB exams and I will make a dummy report in this walkthrough. Also refer to the sample report that HTB has provided in the report writing module, and if I remember correctly they provide it along with the exam. First I will be covering basic Markdown syntax and then I will make a dummy report in sysreptor
+I will be writing this blog with the assumptions that 1. The reader doesn't know markdown and 2. The reader doesn't know how to use sysreptor (I didn't as well, learnt on the exam lol). I highly recommend using Sysreptor, as it has a default template for every HTB exam and I will make a dummy report in this walkthrough. Also refer to the sample report that HTB has provided in the report writing module, and if I remember correctly they provide it along with the exam. First I will be covering basic Markdown syntax and then I will make a dummy report in sysreptor
 
 ![](/assets/images/CPTS/Sysreptor.png)
 
@@ -36,7 +36,7 @@ To render text in **bold like this** use `**these 2 asterisks like this**`
 
 There are 2 ways to render text in *italics like this*, for this I am `*Using single asterisks*` but _another way is to use_ `_underscores like this,_` just make sure to not have a space between the last asterisk or underscore in either the bold or italics part.
 
-Finally highlighting, we put text between a pair of ` what I think are called backticks. On my keyboard these share the same key as the tildes ~, on the left of the number 1 key. This renders special symbols as plaintext, which is why I can show syntax with ease.
+Finally `highlighting`, we put text between a pair of ` what I think are called backticks. On my keyboard these share the same key as the tildes ~, on the left of the number 1 key. This renders special symbols as plaintext, which is why I can show syntax with ease.
 
 ### 3. Rendering Images
 
@@ -44,7 +44,7 @@ To render images, the syntax goes something like `![Caption](/path/to/the/image)
 
 ### 4. Code Blocks
 
-use three backticks, write your code/text and close this block with three backticks.
+Use three backticks, write your code/text and close this block with three backticks.
 
 it should look 
 
@@ -60,7 +60,7 @@ Now, I am not sure why I did not get any tips in examiner's feedback on my repor
 
 ![Feedback I received](/assets/images/CPTS/feedback.png)
 
-Before a step-by-step report, I would like to cover some common pitfalls which are like FAQs or rules that I followed. I know these from looking at various reddit discussions, asking my friends several doubts about it and also reading the examiners feedback others received and were kind enough to share.
+Before a step-by-step report, I would like to cover some common pitfalls which are like FAQs or rules that I followed. I know about these from looking at various reddit discussions, asking my friends several doubts about it and also reading the examiner's feedback others received and were kind enough to share.
 
 After this I will cover a simple scenario and show how to write a report.
 
@@ -78,23 +78,25 @@ Write each step in internal network walkthrough. Yes, the exam is kind of like c
 
 This is another place where for some reason everyone is stuck. I will write one in the sample report I do. The executive summary template has multiple sections in the sysreptor template. I will cover it in the next section.
 
-Note that the executive summary is what the stake holders and management may read as they do not have the time or understanding to sit and go through our report. Since it is targeted towards them, avoid using jargons like `The tester was able to escalate privileges on the DC.target.local host using by dumping the NTDS`. They do not care, they do not understand. Something like `The tester was able to get complete control of the DC.target.local host` is better because it shows clear impact of our findings. The key here is impact, that is not how you can do something, but the fact that you can do it.
+Note that the executive summary is what the stake holders and management may read as they do not have the time or understanding to sit and go through our report. Since it is targeted towards them, avoid using jargons like `The tester was able to escalate privileges on the DC.target.local domain using by dumping the NTDS.dit`. They do not care, they do not understand. Something like `The tester was able to get complete control of the DC.target.local domain` is better because it shows clear impact of our findings. The key here is impact, that is not how you can do something, but the fact that you can do it.
 
 #### 4. Images, general rendering and redacting information
 
-I used the backticks in a bunch of places because it rendered stuff highlighted, rendering text in green. I thought it was cool but I messed up. Sysreptor uses {{ report.candidate.name }} to mention your name. I think it is some sort of advanced markdown syntax I am unaware of. Don't worry, what it means is that you paste {{ report.candidate.name }} in place of your name and your name will be rendered, however, I pasted {{ report.candidate.name }} between the backticks, so it did not render my name in many places. I was sure I would fail because of it lol.
+I used the backticks in a bunch of places because it rendered stuff highlighted, rendering text in green. I thought it was cool but I messed up. Sysreptor uses `report.candidate.name` enclosed in 2 pairs of curly brackets, to mention your name. I think it is some sort of advanced markdown syntax I am unaware of. Don't worry, what it means is that you paste `report.candidate.name` in place of your name and your name will be rendered, however, I pasted `report.candidate.name` between the backticks, so it did not render my name in many places. I was sure I would fail because of it lol.
 
 Speaking of images, be sure to caption them. Learnt that from the feedback BRM shared. 
 
-Also, remember to redact hashes and passwords. use \<Redacted> or \<Snip> in text and just add a solid colored block on the passes/hashes in your screenshots. I missed it at a couple places but tried to follow through as much as I could
+Also, remember to redact hashes and passwords. use \<Redacted> or \<Snip> in text and just add a solid colored block on the passes/hashes in your screenshots. I missed it at a couple places but tried to follow through as much as I could.
 
 #### 5. File size constraints
 
-The file size must be less than 20 Mb. Now you can definitely compress it, but the best tip I got was to reduce the number of images. Instead paste in command in code blocks wherever possible.
+The file size must be less than 20 Mb. Now you can definitely compress it, but the best tip I got was to reduce the number of images. Instead paste in commands with outputs in code blocks wherever possible.
 
 #### 6. Reporting findings
 
 I broke down the details section of the findings into 2 parts, 1. Enumeration and 2. Exploitation and you may also use 3. Post Exploitation if needed, like stealing or overwriting the id_rsa file on a linux host or dumping hashes/changing passwords on a windows host. 
+
+Edit: Editing this and adding a point on recommendation of a friend: Don't chain multiple vulnerabilites in each finding. Each finding is a separate vulnerability. I thought this was obvious but it might not be to everyone. Hoping this helps.
 
 #### 7. Ordering the said findings
 
@@ -112,7 +114,7 @@ The regular 4o model is good enough for remediation suggestions but again, if an
 
 #### 10. Write the report in third person.
 
-Start each finding or step with `The tester did XYZ` or `{{ report.candidate.name }} did XYZ`. Avoid using first person speech, this was a tip I got from a friend and this was also on the feedback of someone who failed.
+Start each finding or step with `The tester did XYZ` or `report.candidate.name did XYZ`. Avoid using first person speech, this was a tip I got from a friend and this was also on the feedback of someone who failed.
 
 ### Writing a report using sysreptor 
 
@@ -131,7 +133,7 @@ Below are the steps I followed on the exam.
  ![Structure of sysreptor](/assets/images/CPTS/Struct1.png)
 
 Put in your details in the `meta` section, add customer contacts in the `Document Control` section.
-A lot of stuff in the Executive Summary is already filled for you, just add in a paragraph talking about how the pentest started and how many hosts or domains were you able to get complete access on.
+A lot of stuff in the `Executive Summary` is already filled for you, just add in a paragraph talking about how the pentest started and how many hosts or domains were you able to get complete access on.
 
 `Network Penetration Test Assessment Summary` is also mostly filled out for you. Just be sure to check it once.
 
@@ -262,12 +264,12 @@ I simply asked chatGPT to generate a 3-4 line summary after feeding it the steps
 
 So in our dummy case, it would look something like: 
 
-`During the assessment, {{ report.candidate.name }} successfully obtained initial access to a web application hosted on {{ report.customer\_short }}’s infrastructure, escalated privileges to root on the server, and pivoted into the internal network. Through targeted Active Directory attacks, including AS-REP roasting, Kerberoasting, and abuse of DCSync privileges, full administrative control over the domain controller was achieved. These findings demonstrate that a compromise of a single exposed application could lead to complete takeover of the internal network.
+`During the assessment, report.candidate.name successfully obtained initial access to a web application hosted on report.customer_short’s infrastructure, escalated privileges to root on the server, and pivoted into the internal network. Through targeted Active Directory attacks, including AS-REP roasting, Kerberoasting, and abuse of DCSync privileges, full administrative control over the domain controller was achieved. These findings demonstrate that a compromise of a single exposed application could lead to complete takeover of the internal network.
 `
 
 #### Conclusion
 
-Report writing for CPTS is quite exhausting and time taking. Please allocate at least 2 if not 3 days for it. I had some time to go for the 13th flag but decided against it which was a great decision because I took a long time to get my report ready for submission
+Report writing for CPTS is quite exhausting and time taking. Please allocate at least 2 if not 3 days for it. I had some time to go for the 13th flag but decided against it which was a great decision because I took a long time to get my report ready for submission.
 
 If this helped or you feel like I skipped anything, feel free to DM me on [Twitter](https://x.com/Yassh_twts) (Shameless plug, follow me) or Linkedin (I don't open it as much so might not respond immediately).
 
