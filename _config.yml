@@ -16,7 +16,7 @@ timezone: Asia/Kolkata
 
 title: Yash's CyberSec blog # the main title
 
-tagline: Currently preparing for the CPTS # it will display as the subtitle
+tagline: CPTS. Currently exploring webapp and API security # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
 
