@@ -1,8 +1,8 @@
 ---
 title: Walkthrough - XSS Portswigger labs 
 date: 2025-07-28 3:30:00 + 05:30
-categories: [OSCP Prep, Web, BSCP]
-tags: [oscp, xss, bscp]    # TAG names should always be lowercase
+categories: [Web, BSCP]
+tags: [xss, bscp]    # TAG names should always be lowercase
 description: An intro to Cross Site Scripting and walkthrough of all 30 portswigger labs
 ---
 
