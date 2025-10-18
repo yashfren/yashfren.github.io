@@ -488,7 +488,7 @@ Description:
 
 The lab says that there is a stored XSS in the comments through which we must steal the cookie and crack the password for the user carlos. Then we must log in as carlos and delete his account.
 
-![](/assets/images/Authentication/Pasted%20image%2020251014190139.PNG)
+![](/assets/images/Authentication/Pasted%20image%2020251014190139.png)
 
 Explanation:
 
