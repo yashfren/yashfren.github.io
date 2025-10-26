@@ -365,7 +365,7 @@ Logging in with this credential - `affiliates:12345678` will solve the lab.
 
 Description:
 
-We have credentials for a uesr and must find a way to bypass 2FA for a thee victim user `carlos`.
+We have credentials for a uesr and must find a way to bypass 2FA for the victim user `carlos`.
 
 ![](/assets/images/Authentication/Pasted%20image%2020251014163233.png)
 
