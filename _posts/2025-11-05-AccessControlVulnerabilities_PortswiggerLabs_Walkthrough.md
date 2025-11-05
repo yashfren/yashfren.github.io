@@ -3,7 +3,7 @@ title: Walkthrough - Access Control Vulnerabilities Portswigger labs
 date: 2025-11-05 2:50:00 + 05:30
 categories: [Web, BSCP]
 tags: [auth, bscp]    ## TAG names should always be lowercase
-description: An intro to Business Logic Vulnerabilities and walkthrough of all 13 portswigger labs
+description: An intro to Access Control Vulnerabilities and walkthrough of all 13 portswigger labs
 ---
 
 Completed all 13 access control vulnerability labs from Portswigger. Access control flaws are among the most common and impactful vulnerabilities in web applications—they determine who can access what, and when implemented poorly, allow attackers to view data, modify settings, or perform actions they shouldn't be able to. These labs covered everything from simple IDOR attacks to more sophisticated techniques like HTTP method tampering and header manipulation. Below is a detailed explanation of access control vulnerabilities followed by step-by-step walkthroughs for each lab.
