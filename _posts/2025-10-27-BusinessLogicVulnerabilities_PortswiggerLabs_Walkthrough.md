@@ -2,7 +2,7 @@
 title: Walkthrough - Business Logic Vulnerabilities Portswigger labs 
 date: 2025-10-27 2:50:00 + 05:30
 categories: [Web, BSCP]
-tags: [auth, bscp]    ## TAG names should always be lowercase
+tags: [bscp]    ## TAG names should always be lowercase
 description: An intro to Business Logic Vulnerabilities and walkthrough of all 12 portswigger labs
 ---
 

@@ -2,7 +2,7 @@
 title: Walkthrough - Access Control Vulnerabilities Portswigger labs 
 date: 2025-11-05 2:50:00 + 05:30
 categories: [Web, BSCP]
-tags: [auth, bscp]    ## TAG names should always be lowercase
+tags: [bscp]    ## TAG names should always be lowercase
 description: An intro to Access Control Vulnerabilities and walkthrough of all 13 portswigger labs
 ---
 

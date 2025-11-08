@@ -2,7 +2,7 @@
 title: Walkthrough - SQLi Portswigger labs 
 date: 2025-10-02 3:30:00 + 05:30
 categories: [Web, BSCP]
-tags: [sqli, bscp]    # TAG names should always be lowercase
+tags: [bscp]    # TAG names should always be lowercase
 description: An intro to SQL injection and walkthrough of all 18 portswigger labs
 ---
 

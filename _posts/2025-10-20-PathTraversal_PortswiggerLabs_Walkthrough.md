@@ -2,7 +2,7 @@
 title: Walkthrough - Path Traversal Portswigger labs 
 date: 2025-10-20 20:10:00 + 05:30
 categories: [Web, BSCP]
-tags: [auth, bscp]    ### TAG names should always be lowercase
+tags: [bscp]    ### TAG names should always be lowercase
 description: An intro to Path Traversal and walkthrough of all 6 portswigger labs
 ---
 

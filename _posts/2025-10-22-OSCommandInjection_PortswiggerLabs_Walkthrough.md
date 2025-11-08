@@ -2,7 +2,7 @@
 title: Walkthrough - OS Command Injections Portswigger labs 
 date: 2025-10-22 17:00:00 + 05:30
 categories: [Web, BSCP]
-tags: [auth, bscp]    ######### TAG names should always be lowercase
+tags: [bscp]    ######### TAG names should always be lowercase
 description: An intro to OS Command Injection and walkthrough of all 6 portswigger labs
 ---
 
