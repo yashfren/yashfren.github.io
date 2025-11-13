@@ -3,15 +3,7 @@ title: Walkthrough - File Upload Portswigger labs
 date: 2025-11-11 2:50:00 + 05:30
 categories: [Web, BSCP]
 tags: [bscp]    ## TAG names should always be lowercase
-description: An intro File Upload Vulnerabilities and walkthrough of all 5 portswigger labs
----
-
----
-title: Walkthrough - File Upload Portswigger labs 
-date: 2025-11-11 2:50:00 + 05:30
-categories: [Web, BSCP]
-tags: [fileupload, bscp]
-description: A comprehensive guide to file upload vulnerabilities with walkthroughs of all 7 Portswigger labs
+description: An intro File Upload Vulnerabilities and walkthrough of all 7 portswigger labs
 ---
 
 Completed all 7 file upload vulnerability labs from Portswigger. File upload vulnerabilities are particularly dangerous because they can lead directly to remote code execution—allowing attackers to upload web shells and gain complete control over the server. These labs covered various validation bypass techniques, from simple content-type manipulation to race conditions that exploit the timing window between file upload and validation. Below is a detailed explanation of file upload vulnerabilities followed by step-by-step walkthroughs for each lab.
