@@ -1,8 +1,8 @@
 ---
 title: Walkthrough - SSRF Portswigger labs 
-date: 2025-11-14 23:03:00 + 05:30
+date: 2025-11-15 20:00:00 + 05:30
 categories: [Web, BSCP]
-tags: [ssrf, bscp]
+tags: [bscp]
 description: A comprehensive guide to Server-Side Request Forgery vulnerabilities with walkthroughs of all 7 Portswigger labs
 ---
 
