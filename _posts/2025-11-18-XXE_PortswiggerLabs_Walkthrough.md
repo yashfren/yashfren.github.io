@@ -2,7 +2,7 @@
 title: Walkthrough - XXE Portswigger labs 
 date: 2025-11-18 00:00:00 + 05:30
 categories: [Web, BSCP]
-tags: [xxe, bscp]
+tags: [bscp]
 description: A comprehensive guide to XML External Entity (XXE) vulnerabilities with walkthroughs of all 9 Portswigger labs
 ---
 
