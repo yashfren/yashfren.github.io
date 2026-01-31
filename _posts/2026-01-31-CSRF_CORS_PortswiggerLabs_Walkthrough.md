@@ -453,25 +453,25 @@ Description:
 
 This lab is vulnerable to CSRF and it has no defenses. We need to change the victim's email address to solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126232012.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126232012.png)
 
 Explanation:
 
 We log into the account with the given credentials.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126230229.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126230229.png)
 
 We use the CSRF PoC generator from Burp pro to generate the CSRF PoC.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126230358.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126230358.png)
 
 Sending this PoC from the exploit server will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126230321.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126230321.png)
 
 Remember to change the email to something different than what you changed previously or it doesn't work.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126230334.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126230334.png)
 
 ### 2. CSRF where token validation depends on request method
 
@@ -479,21 +479,21 @@ Description:
 
 In this lab, we need to use a different request method to change the victim's email address to solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126232803.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126232803.png)
 
 Explanation:
 
 We send the request for changing the email to repeater.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126233138.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126233138.png)
 
 We change the request method to GET and we can see that the server accepts the request. We then generate the a CSRF PoC script.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126233347.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126233347.png)
 
 Sending this script via the exploit server will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126233440.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126233440.png)
 
 ### 3. CSRF where token validation depends on token being present
 
@@ -501,21 +501,21 @@ Description:
 
 In this lab, we need to change the victim's email id but if the CSRF token is removed, it can bypass the CSRF defense.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126233639.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126233639.png)
 
 Explanation:
 
 We send the email change request to repeater. When we remove the CSRF token, we can still change the email. We can see that we get a `302 Found` response.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126234246.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126234246.png)
 
 We will generate and send the CSRF PoC script to the victim using the exploit server. As we can see, the CSRF token is missing.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126234438.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126234438.png)
 
 Sending the PoC will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260126234459.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260126234459.png)
 
 ### 4. CSRF where token is not tied to user session
 
@@ -523,29 +523,29 @@ Description:
 
 We are given two testing accounts here. The CSRF tokens are not tied to user session. We need to change the victim's email id.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129103432.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129103432.png)
 
 Explanation:
 
 We first log in to the first account and change the email id.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129105355.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129105355.png)
 
 We then log in to the second account and change the email id.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129105539.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129105539.png)
 
 We need a new CSRF token so we login again to the first account.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129105651.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129105651.png)
 
 We will then create a CSRF PoC.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129105749.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129105749.png)
 
 Sending this PoC will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129105809.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129105809.png)
 
 ### 5. CSRF where token is tied to non-session cookie
 
@@ -553,34 +553,34 @@ Description:
 
 In this lab, the CSRF token is tied to a non-session cookie and we need to change the victim's email id.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129105938.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129105938.png)
 
 Explanation:
 
 We have a non session cookie called `csrfKey`. We login to the first account.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129112256.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129112256.png)
 
 We login to the second account next. We have `csrfKey=RAWVZK9VlIrSJPYA51wAEjrBgU3YocH6` and `csrf token:q9BQUotq33olnNFls0TfwHSf1z2vCZMP`. In order to exploit CSRF, we need to inject this `csrfKey` cookie.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129112607.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129112607.png)
 
 When we try to search something, we can see that the server sets a cookie called `LastSearchTerm` with whatever we searched.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129112844.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129112844.png)
 
 We use a CRLF (Carriage return line feed) - `%0D%0A` with `Set-Cookie:csrfKey=<key>` to inject the cookie into the user session. Note that I have made a typo here. The `c` in `csrfKey` is not capital.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129113709.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129113709.png)
 
 We now generate a CSRF PoC.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129113840.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129113840.png)
 
 We remove the history.pushState line to `<img src="https://0a0400ba047b556180b09e4000d9000b.web-security-academy.net/?search=test%0D%0ASet-Cookie:%20csrfKey=PSngZMd6UExBQpOIHNCAVoT6TREIbLTU%3b%20SameSite=None" onerror="document.forms[0].submit()">. 
 `
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129114459.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129114459.png)
 
 The full PoC looks like this.
 
@@ -600,7 +600,7 @@ The full PoC looks like this.
 
 Sending the PoC will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129122505.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129122505.png)
 
 ### 6. CSRF where token is duplicated in cookie
 
@@ -608,13 +608,13 @@ Description:
 
 In this case, the CSRF token is duplicated in a cookie.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129130134.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129130134.png)
 
 Explanation:
 
 This is similar to the previous lab where we use the CRLF to inject the cookie into the victim's session.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129131812.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129131812.png)
 
 The final PoC looked like this.
 
@@ -634,7 +634,7 @@ The final PoC looked like this.
 
 Sending the PoC solved the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129131859.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129131859.png)
 
 ### 7. SameSite Lax bypass via method override
 
@@ -642,29 +642,29 @@ Description:
 
 We need to reset the victim's email address by bypassing the SameSite protection which is Lax.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129155810.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129155810.png)
 
  Explanation:
 
 We can see that the POST request for changing the email works.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129160250.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129160250.png)
 
 However when we change the request to GET, it fails.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129160359.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129160359.png)
 
 We can see that we can use `_method` to bypass the SameSite restriction.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129160431.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129160431.png)
 
 As we can see, adding the `_method=POST` as a parameter to the GET request allows the server to access it.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129160522.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129160522.png)
 
 Generating the CSRF PoC for this request and sending it will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129160729.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129160729.png)
 
 ### 8. SameSite Strict bypass via client-side redirect
 
@@ -672,78 +672,78 @@ Description:
 
 In order to change the email of the victim, the request should somehow originate from like within the site. Like through a redirect. (I am not sure if I can explain it.)
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129163912.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129163912.png)
 
 Explanation:
 
 We first change the email once and send this request to repeater.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164006.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164006.png)
 
 We change the request method to GET. We can see that the browser fortunately accepts it. Next we need to find a redirect to abuse.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164027.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164027.png)
 
 We try posting a comment.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164123.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164123.png)
 
 We are brought to this page. it says we will be redirected automatically.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164137.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164137.png)
 
 As we can see, we are redirected to the blog post under which we commented.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164154.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164154.png)
 
 We send the request which said we will be redirected momentarily to repeater. There is this `<a href="/post/2">` tag which looks interesting. It looks like `postId` parameter is reflected in it.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164345.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164345.png)
 
 We add a path traversal string with the change email endpoint - `../my-account/change-email`. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164357.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164357.png)
 
 As we can see it works. That `submit=1` is missing so it breaks.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164512.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164512.png)
 
 We copy the part with `submit` and `email` parameters in the redirection request. We can send it once to change the email of the account that we have. We can see that it works.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164713.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164713.png)
 
 Generating the CSRF PoC and sending it to the victim will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129164802.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129164802.png)
 ### 9. SameSite Strict bypass via sibling domain
 
 Description:
 
 We need to abuse the chat feature to find the victim's password. There is some web socket connection that we need to Hijack. We then need to log into the victim's account.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129171722.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129171722.png)
 
 Explanation:
 
 We are not given any account credentials. We can see a chat here.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129171843.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129171843.png)
 
 Going through the requests we see this request to `/resources/js/chat.js` and in response we see a new URL which is `https://cms-WBID.web-security-academy.net`.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129172540.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129172540.png)
 
 We can see the web socket connections here.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129172131.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129172131.png)
 
 We head over to the `https://cms-WBID.web-security-academy.net`. Let's try to test it for XSS.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129172704.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129172704.png)
 
 We can see that the site is vulnerable to XSS.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129172646.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129172646.png)
 
 We use the below javascript payload to steal the chat history from another user.
 
@@ -753,15 +753,15 @@ We use the below javascript payload to steal the chat history from another user.
 
 We URL encode the payload.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129173202.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129173202.png)
 
 We send the payload to abuse the XSS.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129173215.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129173215.png)
 
 Sending it to ourselves, we can see the traffic on our collaborator.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129173144.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129173144.png)
 
 We then send this URL in script tags to the victim.
 
@@ -773,11 +773,11 @@ location="https://cms-0aab00f604064dc380490388009d0034.web-security-academy.net/
 
 We can see the victim's chats on the collaborator. We can see the victim's password.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129173433.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129173433.png)
 
 Logging in will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260129173509.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260129173509.png)
 
 ### 10. SameSite Lax bypass via cookie refresh
 
@@ -785,33 +785,33 @@ Description:
 
 We need to change the victim's email address like before. However the browser is setting the SameSite Policy which we need to bypass. The application is also using OAuth-based login.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130131102.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130131102.png)
 
 Explanation:
 
 We can login with the given credentials. It is OAuth based. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130131910.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130131910.png)
 
 The site asked us to click on continue to give access to the shopping site.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130131933.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130131933.png)
 
 We get the message that we have logged in successfully.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130131950.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130131950.png)
 
 We then change the email id once and send the request to repeater.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130132026.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130132026.png)
 
 We generate a CSRF PoC. We will need to edit it before sending it to the victim.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130132105.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130132105.png)
 
 We see that there is a 120 second window where if the SameSite restriction is automatically set by the browser, where POST requests are allowed. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130132134.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130132134.png)
 
 We first redirect the user to the login page. Once logged in, the cookies are in the browser. The script executes after 5 seconds and submits the form which will reset the victim's email address.
 
@@ -836,7 +836,7 @@ We first redirect the user to the login page. Once logged in, the cookies are in
 
 Sending this PoC will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130132611.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130132611.png)
 
 ### 11. CSRF where Referer validation depends on header being present
 
@@ -844,17 +844,17 @@ Description:
 
 In this lab, the validation for CSRF is dependent on the Referer header. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130135101.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130135101.png)
 
 Explanation: 
 
 We can set a meta tag which will skip validation of referer header.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130135135.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130135135.png)
 
 We reset the email address once and send the request to repeater. We then generate a CSRF PoC.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130135221.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130135221.png)
 
 We added the `<meta>` tag to the CSRF PoC. 
 
@@ -876,7 +876,7 @@ We added the `<meta>` tag to the CSRF PoC.
 
 Sending the PoC will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130135319.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130135319.png)
 
 ### 12. CSRF with broken Referer validation
 
@@ -884,25 +884,25 @@ Description:
 
 In this lab, the CSRF validation is broken and we need to bypass it to change the victim's password.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130230432.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130230432.png)
 
 Explanation:
 
 We try changing the Referer header to something else to see what works. The subdomain admin worked. It looks like the Referer header must have the Host URL in it for the request to pass.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130232917.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130232917.png)
 
 We confirm it by using `Referer https://evil.net/?<PATH TO HOST URL>`. We can see that even this works.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130233342.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130233342.png)
 
 We can see that messing with the Host URL gives us the `400 Bad Request` as a response which says Invalid referer header.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130233356.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130233356.png)
 
 We generate the CSRF payload but need to add the Host URL as `/?URL` to the `history.pushState()` line and we need to add a header - `Referrer-Policy: unsafe-url`. Sending this will solve the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260130233709.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260130233709.png)
 
 ### 1. CORS vulnerability with basic origin reflection
 
@@ -910,21 +910,21 @@ Description:
 
 We need to abuse the CORS misconfiguration to get the victim's API key. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131110751.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131110751.png)
 
 Explanation:
 
 We login using our given creds and we can see our own API key.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131165319.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131165319.png)
 
 The `Access-Control-Allow-Credentials: true`  is visible. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131165356.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131165356.png)
 
 When we add `Origin: https://evil.com` we see `Access-Control-Allow-Origin: https://evil.com`.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131165452.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131165452.png)
 
 We send this payload to the victim to steal the API Key.
 
@@ -944,23 +944,23 @@ We send this payload to the victim to steal the API Key.
 
 We send the payload and wait for a responses on the collaborator.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131170135.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131170135.png)
 
 We can see the responses and the API key for administrator user in the Referer header.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131170150.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131170150.png)
 
 We use decoder to decode the string and extract the API Key.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131170215.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131170215.png)
 
 We submit the API Key. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131170234.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131170234.png)
 
 This solves the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131170246.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131170246.png)
 
 ### 2. CORS vulnerability with trusted null origin
 
@@ -968,21 +968,21 @@ Description:
 
 In this lab, we need to again steal the victim's API Key and there CORS is misconfigured to work with a null origin.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131110812.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131110812.png)
 
 Explanation:
 
 We login with the given credentials and see our own API Key.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131170637.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131170637.png)
 
 We send this request to repeater. When we add `Origin: https://evil.com` we DO NOT see `Access-Control-Allow-Origin: https://evil.com` like before. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131170957.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131170957.png)
 
 However when we add `Origin: null` we see `Access-Control-Allow-Origin: null`.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131171016.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131171016.png)
 
 We then send the following payload to the victim. We are using the iframe since requests originating from an iframe will have Origin set to null.
 
@@ -1001,19 +1001,19 @@ We then send the following payload to the victim. We are using the iframe since 
 
 We see the response on our collaborator.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131171448.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131171448.png)
 
 We use decoder to decode the string and extract the API Key.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131171510.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131171510.png)
 
 We submit the API Key. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131171523.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131171523.png)
 
 This solves the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131171536.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131171536.png)
 
 ### 3. CORS vulnerability with trusted insecure protocols
 
@@ -1021,37 +1021,37 @@ Description:
 
 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131110836.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131110836.png)
 
 Explanation:
 
 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131172851.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131172851.png)
 
 When we add `Origin: https://evil.com` we do not see `Access-Control-Allow-Origin: https://evil.com`.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131172712.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131172712.png)
 
 When we add `Origin: null` we do not see `Access-Control-Allow-Origin: null`.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131172738.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131172738.png)
 
 When we add `Origin: URL` we see `Access-Control-Allow-Origin: URL`.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131172759.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131172759.png)
 
 When we add `Origin: subdomain.URL` we see `Access-Control-Allow-Origin: subdomain.URL`. Now we need to figure out a way to send the request from the origin that is the site or its subdomains.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131172825.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131172825.png)
 
 We use the check stock functionality and see a subdomain - `stock.URL`.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131172930.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131172930.png)
 
 We see that the `productId` is vulnerable to XSS.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131173016.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131173016.png)
 
 We use this payload to steal the API Key of the victim.
 
@@ -1061,19 +1061,19 @@ We use this payload to steal the API Key of the victim.
 
 We see the response on our collaborator when we send the payload.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131173637.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131173637.png)
 
 We use decoder to decode the string and extract the API Key.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131173659.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131173659.png)
 
 We submit the API Key. 
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131173713.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131173713.png)
 
 This solves the lab.
 
-![](/assets/images/CSRF-CORS/Pasted image 20260131173735.png)
+![](/assets/images/CSRF-CORS/Pasted%20image%2020260131173735.png)
 
 
 
