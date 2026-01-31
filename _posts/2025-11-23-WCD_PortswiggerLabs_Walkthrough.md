@@ -2,7 +2,7 @@
 title: Walkthrough - Web Cache Deception Portswigger labs 
 date: 2025-11-22 19:18:00 + 05:30
 categories: [Web, BSCP]
-tags: [webcachedeception, bscp]
+tags: [bscp]
 description: A comprehensive guide to web cache deception vulnerabilities with walkthroughs of all 5 Portswigger labs
 ---
 
