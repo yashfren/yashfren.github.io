@@ -235,10 +235,10 @@ Double-Submit Cookies:
 Use Framework Protections:
 ```python
 # Django
-{% csrf_token %}
+{% raw %}{% csrf_token %}{% endraw %}
 
 # Rails  
-<%= form_authenticity_token %>
+{% raw %}<%= form_authenticity_token %>{% endraw %}
 
 # Express
 app.use(csrf())
