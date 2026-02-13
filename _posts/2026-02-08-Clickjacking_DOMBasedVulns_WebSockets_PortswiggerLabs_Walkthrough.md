@@ -1,5 +1,5 @@
 ---
-title: Walkthrough - Clickjacking, DOM-based Vulnerabilities, and WebSockets Labs
+title: Walkthrough - Clickjacking, DOM-based Vulnerabilities, and WebSockets labs
 date: 2026-02-08 15:30:00 + 05:30
 categories: [Web, BSCP]
 tags: [bscp]
@@ -12,19 +12,19 @@ Completed the final set of client-side vulnerability labs from PortSwigger—Cli
 
 Clickjacking (UI redressing) tricks users into clicking on something different from what they perceive by overlaying invisible or opaque elements over legitimate UI components.
 
-**How It Works:**
+How It Works:
 - Attacker frames the target website in a transparent iframe
 - Places decoy content (buttons, text) at exact coordinates over target buttons
 - User thinks they're clicking the decoy but actually clicks the hidden iframe
 
-**Common Techniques:**
+Common Techniques:
 - Basic iframe overlay with CSS positioning
 - Pre-filling form parameters via URL
 - Bypassing frame-busting with `sandbox="allow-forms"`
 - Multistep attacks requiring multiple clicks
 - Chaining with DOM XSS for combined impact
 
-**Mitigation:**
+Mitigation:
 - `X-Frame-Options: DENY` header
 - `Content-Security-Policy: frame-ancestors 'none'` 
 - Frame-busting JavaScript (can be bypassed)
@@ -34,27 +34,27 @@ Clickjacking (UI redressing) tricks users into clicking on something different f
 
 DOM-based vulnerabilities occur when client-side JavaScript processes untrusted data unsafely, modifying the DOM in ways that execute attacker-controlled code.
 
-**Sources (Attacker-Controlled):**
+Sources (Attacker-Controlled):
 - `window.location` (URL parameters, hash, pathname)
 - `document.referrer`
 - `document.cookie`
 - Web messages (`postMessage`)
 - Web storage (`localStorage`, `sessionStorage`)
 
-**Sinks (Dangerous Functions):**
+Sinks (Dangerous Functions):
 - `innerHTML`, `outerHTML`
 - `document.write()`
 - `eval()`, `setTimeout()`, `setInterval()`
 - `location`, `location.href`
 - `element.src`, `element.setAttribute()`
 
-**Common Types:**
+Common Types:
 - DOM XSS via web messaging
 - Open redirection through URL parameters
 - Cookie manipulation leading to XSS
 - DOM clobbering (overwriting JavaScript variables with HTML elements)
 
-**Mitigation:**
+Mitigation:
 - Validate and sanitize all untrusted input
 - Use `textContent` instead of `innerHTML`
 - Verify message origins in `postMessage` handlers
@@ -65,19 +65,19 @@ DOM-based vulnerabilities occur when client-side JavaScript processes untrusted 
 
 WebSockets enable full-duplex communication between client and server but introduce unique attack vectors when not properly secured.
 
-**How WebSockets Work:**
+How WebSockets Work:
 - HTTP upgrade handshake to `ws://` or `wss://`
 - Persistent bidirectional connection
 - Messages sent without HTTP overhead
 - No automatic CSRF protection like traditional requests
 
-**Common Vulnerabilities:**
-- **Message Manipulation:** Intercepting/modifying WebSocket messages  
-- **Cross-Site WebSocket Hijacking (CSWSH):** Similar to CSRF but for WebSocket handshakes
-- **Input Validation Bypass:** Filters on HTTP but not WebSocket messages
-- **Authentication Bypass:** Weak handshake authentication
+Common Vulnerabilities:
+- Message Manipulation: Intercepting/modifying WebSocket messages  
+- Cross-Site WebSocket Hijacking (CSWSH): Similar to CSRF but for WebSocket handshakes
+- Input Validation Bypass: Filters on HTTP but not WebSocket messages
+- Authentication Bypass: Weak handshake authentication
 
-**Mitigation:**
+Mitigation:
 - Use CSRF tokens in handshake
 - Validate message origins
 - Implement proper authentication/authorization
@@ -667,9 +667,9 @@ The exploit code looks like this:
 ```
 
 Breaking down the attack:
-1. **Line 2**: Creates WebSocket connection to the victim site (note `wss://` for secure WebSocket, NOT the exploit server URL)
-2. **Lines 3-5**: When connection opens (`onopen`), immediately sends "READY" command to retrieve all chat messages
-3. **Lines 6-8**: For every message received (`onmessage`), sends it to our Burp Collaborator server to exfiltrate the data
+1. Line 2: Creates WebSocket connection to the victim site (note `wss://` for secure WebSocket, NOT the exploit server URL)
+2. Lines 3-5: When connection opens (`onopen`), immediately sends "READY" command to retrieve all chat messages
+3. Lines 6-8: For every message received (`onmessage`), sends it to our Burp Collaborator server to exfiltrate the data
 
 The victim's browser automatically sends their session cookie when establishing the WebSocket connection, so the server thinks it's a legitimate request from the victim. We're essentially hijacking their WebSocket session.
 
@@ -687,20 +687,20 @@ Looking through the Collaborator requests, we find the victim's credentials in t
 
 These 15 labs covered the final set of client-side vulnerabilities in PortSwigger's BSCP path. Key takeaways from each topic:
 
-**Clickjacking:**
+Clickjacking:
 - CSS positioning is precise work—opacity 0.5 for testing, 0.001 for exploitation
 - `sandbox="allow-forms"` bypasses frame-busting scripts
 - Pre-filling form parameters makes attacks more effective
 - Multistep attacks require careful alignment for each interaction
 
-**DOM-Based Vulnerabilities:**
+DOM-Based Vulnerabilities:
 - `postMessage` without origin validation is dangerous
 - DOM clobbering exploits how HTML elements with IDs become `window` properties
 - The `cid:` URL scheme bypasses HTML encoding in some contexts
 - Chaining cookie manipulation with page reloads enables persistent XSS
 - Libraries that iterate over DOM properties can be broken by clobbering collection objects
 
-**WebSockets:**
+WebSockets:
 - WebSocket messages bypass traditional HTTP filters
 - Handshake manipulation with headers like `X-Forwarded-For` circumvents IP restrictions
 - Cross-site WebSocket hijacking works because browsers automatically send cookies
