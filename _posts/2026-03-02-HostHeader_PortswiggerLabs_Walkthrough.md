@@ -460,7 +460,7 @@ Logging in with the `carlos`'s credentials will solve the lab.
 
 ![](/assets/images/HHHA/Pasted%20image%2020260301012541.png)
 
-## Key Takeaways
+## Conclusion
 
 These 7 labs demonstrated how a single overlooked input — the HTTP Host header — can lead to devastating attacks across multiple vulnerability classes. The most important lessons:
 
