@@ -1,14 +1,14 @@
 ---
-title: Walkthrough - JWT Authentication Portswigger labs
+title: Walkthrough - JWT Attacks Portswigger labs
 date: 2026-03-19 00:30:00 + 05:30
 categories: [Web, BSCP]
 tags: [bscp]
-description: An intro to JWT Authentication vulnerabilities and walkthrough of all 8 portswigger labs
+description: An intro to JWT Attacks vulnerabilities and walkthrough of all 8 portswigger labs
 ---
 
-Completed all 8 JWT Authentication labs from Portswigger. JSON Web Tokens are the dominant mechanism for stateless session management in modern web applications—but their flexible specification has historically been a minefield. Unlike traditional server-side sessions where the server holds state and the client holds only an opaque identifier, JWTs embed the session data directly in the token and trust the client to present it unmodified. That trust model is exactly what these labs exploit. The labs covered unverified signatures, the `alg:none` attack, weak signing keys cracked with hashcat, JWK and JKU header injection attacks, `kid` path traversal to a null byte signing key, and two variants of algorithm confusion—one with an exposed public key and one where the key must be derived from two JWT samples. Below is a detailed explanation of JWT authentication vulnerabilities followed by step-by-step walkthroughs for each lab.
+Completed all 8 JWT Attacks labs from Portswigger. JSON Web Tokens are the dominant mechanism for stateless session management in modern web applications—but their flexible specification has historically been a minefield. Unlike traditional server-side sessions where the server holds state and the client holds only an opaque identifier, JWTs embed the session data directly in the token and trust the client to present it unmodified. That trust model is exactly what these labs exploit. The labs covered unverified signatures, the `alg:none` attack, weak signing keys cracked with hashcat, JWK and JKU header injection attacks, `kid` path traversal to a null byte signing key, and two variants of algorithm confusion—one with an exposed public key and one where the key must be derived from two JWT samples. Below is a detailed explanation of JWT authentication vulnerabilities followed by step-by-step walkthroughs for each lab.
 
-## Everything about JWT Authentication Vulnerabilities
+## Everything about JWT Attacks Vulnerabilities
 
 ##### 1. What is a JSON Web Token?
 
