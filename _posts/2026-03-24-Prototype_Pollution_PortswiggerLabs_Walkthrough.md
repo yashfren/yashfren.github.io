@@ -1,6 +1,6 @@
 ---
 title: Walkthrough - Prototype Pollution Portswigger labs
-date: 2026-03-24 12:30:00 + 05:30
+date: 2026-03-24 12:00:00 + 05:30
 categories: [Web, BSCP]
 tags: [bscp]
 description: An intro to Prototype Pollution vulnerabilities and walkthrough of all 10 portswigger labs
