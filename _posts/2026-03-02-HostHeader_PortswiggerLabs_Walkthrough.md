@@ -336,7 +336,7 @@ We copy this request in repeater.
 
 ![](/assets/images/HHHA/Pasted%20image%2020260228013904.png)
 
-Following the redirection in repeater gives us `403 Forbidden`. That is because we don't have the absolute URL in the 
+Following the redirection in repeater gives us `403 Forbidden`. That is because we don't have the absolute URL in the first line of the request with the GET method.
 
 ![](/assets/images/HHHA/Pasted%20image%2020260228013924.png)
 

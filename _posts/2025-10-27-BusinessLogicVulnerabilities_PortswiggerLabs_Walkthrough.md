@@ -752,7 +752,7 @@ We will see that we get `invalid address: wiener` on our webpage.
 
 ![](/assets/images/BusinessLogicVulns/Pasted%20image%2020251024184405.png)
 
-We will se that this `POST` request to comment endpoint that is returning a set-cookie header.
+We will see that this `POST` request to comment endpoint that is returning a set-cookie header.
 
 ![](/assets/images/BusinessLogicVulns/Pasted%20image%2020251024190236.png)
 

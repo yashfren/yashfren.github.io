@@ -279,7 +279,7 @@ We will chose the RSA key we had generated and click OK.
 
 ![](/assets/images/JWT/Pasted%20image%2020260317182541.png)
 
-We can not access the admin panel.
+We can now access the admin panel.
 
 ![](/assets/images/JWT/Pasted%20image%2020260317182623.png)
 

@@ -118,7 +118,7 @@ The `../` sequences move up the directory tree, allowing access to files outside
 
 Description:
 
-As per the vlab description, there is a path traversal vulnerability and we should display `/etc/passwd`.
+As per the lab description, there is a path traversal vulnerability and we should display `/etc/passwd`.
 
 ![](/assets/images/PathTraversal/Pasted%20image%2020251020194820.png)
 

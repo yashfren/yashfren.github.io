@@ -571,7 +571,7 @@ The value of the `X-Host` header is reflected in the response and it points to `
 
 ![](/assets/images/WCP/Pasted%20image%2020260221131346.png)
 
-We will change the file name to `/resources/js/tracking.js` and host `aler(1)` on it.
+We will change the file name to `/resources/js/tracking.js` and host `alert(1)` on it.
 
 ![](/assets/images/WCP/Pasted%20image%2020260221131751.png)
 
