@@ -56,13 +56,19 @@ Now I will write about tips and setup and how I fixed that proctor issue and eve
 
 # 2. Tips and stuff to keep in mind
 
-1. Let's start from prep, Do I need any additional resources to prepare? Nope. Portswigger labs, apprentice and practitioner level are more than enough, do them all. I'd say do the expert level labs just for fun. Even though they are expert level rated, they are fun and there is a certain satisfaction to completing everything entirely.
+##### 1. Let's start from prep, Do I need any additional resources to prepare? 
 
-2. 3rd party tools are allowed? Yes they are. I had sqlmap ready in case I ran into SQLi.
+Nope. Portswigger labs, apprentice and practitioner level are more than enough, do them all. I'd say do the expert level labs just for fun. Even though they are expert level rated, they are fun and there is a certain satisfaction to completing everything entirely.
 
-3. What about AI? Yes even that is allowed. I used claude to fix a couple of my payloads on the exam. It will really be a life saver if you are sure about what you are doing. What I mean is, if you ask it to debug a payload for XSS but the vulnerability is deserialization, you are gonna be stuck. AI doesn't know if the bug is real or not (unless you are using an agent to solve the exam).
+##### 2. 3rd party tools are allowed? 
 
-4. How is this exam structured?
+Yes they are. I had sqlmap ready in case I ran into SQLi.
+
+##### 3. What about AI? 
+
+Yes even that is allowed. I used claude to fix a couple of my payloads on the exam. It will really be a life saver if you are sure about what you are doing. What I mean is, if you ask it to debug a payload for XSS but the vulnerability is deserialization, you are gonna be stuck. AI doesn't know if the bug is real or not (unless you are using an agent to solve the exam).
+
+##### 4. How is this exam structured?
 
 You have 4 hours and 2 webapps to hack. Hack whatever you want first, no problem. 
 
@@ -74,7 +80,7 @@ Privesc - Get to admin panel or the administrator account from low privilege acc
 
 File read / RCE - Read the flag at /home/carlos/secret and submit it to solve the lab. 
 
-5. But 4 hours are enough to solve everything? How to not get stuck?
+##### 5. But 4 hours are enough to solve everything? How to not get stuck?
 
 Read this blog - [https://micahvandeusen.com/blog/burp-suite-certified-practitioner-exam-review/](https://micahvandeusen.com/blog/burp-suite-certified-practitioner-exam-review/).
 
@@ -117,15 +123,15 @@ What does this mean?
 
 It means there is no point looking for OS command injection when are not a low privileged user or admin user. Same with path traversal or SSRF, as those vulnerabilities are useful for file reading. 
 
-6. How to get more practice?
+##### 6. How to get more practice?
 
 SOLVE THE PRACTICE TESTS. I cannot stress this enough. This is the nearest experience to the exam environment you will get. In fact, the exam is a bit tougher than these practice tests I'd say.
 
-7. How did I not get stuck?
+##### 7. How did I not get stuck?
 
 I ran a deep scan on every new functionality I found. EVERY ONE. It takes about 15 minutes to run on one endpoint and you can run many of them parallely, so just do it. I found a bug that I was unable to bypass the filters for. I thought it was a rabbit hole but the burp scanner gave me a working payload lol. This is how I legit solved something I thought was unhackable. 
 
-8. What was the proctor issue?
+##### 8. What was the proctor issue?
 
 I remember reading other reviews that say that you can shut off the proctor after 5 minutes. That is not true. Do NOT do that. Let it remain ON till you submit your zip file. 
 
@@ -135,7 +141,7 @@ Long answer: I shared my screen with my friend on discord and I was using the we
 
 This is simple to do. Since I was using brave, I went to `brave://settings/system` and toggled `Use graphics acceleration when available` this to off, relaunch browser. 
 
-9. Old vs New setup?
+##### 9. Old vs New setup?
 
 I was using brave browser and running proctor on it and I used a kali vm with burp pro, ysoserial and sqlmap for the first attempt. 
 
@@ -143,7 +149,7 @@ After what happened then, I asked portswigger staff about the best setup + a fri
 
 So for the second attempt I used brave as the proctor browser and I used the in-built browser in Burp Suite for solving the exam. I also had already closed sqlmap repo on my laptop and I was ready to boot the VM with ysoserial just in case as that would be the last step.
 
-10. How to fix a broken burp UI on windows?
+##### 10. How to fix a broken burp UI on windows?
 
 After installing BurpSuite Pro on windows, this is how the UI looked like. Almost everything I tried, failed. 
 
