@@ -147,7 +147,7 @@ I was using brave browser and running proctor on it and I used a kali vm with bu
 
 After what happened then, I asked portswigger staff about the best setup + a friend recommended I stick to windows as burp is all I need. 
 
-So for the second attempt I used brave as the proctor browser and I used the in-built browser in Burp Suite for solving the exam. I also had already closed sqlmap repo on my laptop and I was ready to boot the VM with ysoserial just in case as that would be the last step.
+So for the second attempt I used brave as the proctor browser and I used the in-built browser in Burp Suite for solving the exam. I also had already cloned sqlmap repo on my laptop and I was ready to boot the VM with ysoserial just in case as that would be the last step.
 
 ##### 10. How to fix a broken burp UI on windows?
 
