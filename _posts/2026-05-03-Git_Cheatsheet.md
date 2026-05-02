@@ -1,6 +1,6 @@
 ---
 title: Git & GitHub Cheatsheet
-date: 2026-05-03 10:00:00 + 05:30
+date: 2026-05-03 1:00:00 + 05:30
 categories: [Cheatsheet]
 tags: [git, github, cheatsheet]
 description: A comprehensive Git and GitHub cheatsheet covering everything from setup to advanced features like bisect, worktrees, and interactive rebase.
@@ -8,7 +8,7 @@ description: A comprehensive Git and GitHub cheatsheet covering everything from 
 
 # Git & GitHub Cheatsheet
 
-I recently had to learn Git properly after [dual booting Ubuntu]({% post_url 2026-04-26-Week_16_2026 %}) and needing a way to sync my notes and projects across both operating systems. Before this I was mostly just using GitHub's web UI like a caveman, so I decided to actually sit down and learn how Git works under the hood.
+I recently had to learn Git properly after [Dual booting linux](https://yashfren.github.io/posts/Week_16_2026/). and needing a way to sync my notes and projects across both operating systems. Before this I was mostly just using GitHub's web UI like a caveman, so I decided to actually sit down and learn how Git works under the hood.
 
 These are my compiled notes from that process. It starts with the basics (setup, commits, branching) and goes all the way to more advanced stuff like interactive rebase, bisect, worktrees, and resolving merge conflicts. I've tried to keep explanations short and include diagrams where they help. Think of this as a reference you can come back to rather than a tutorial you read once.
 
@@ -27,12 +27,12 @@ git version
 
 ### Porcelain Commands vs Plumbing Commands
 
-In **Git version control system**, commands are often grouped into **porcelain** and **plumbing**:
+In Git version control system, commands are often grouped into porcelain and plumbing:
 
-- **Porcelain commands** are the user-friendly ones you use daily (`git commit`, `git push`, etc.). They provide a clean, stable interface and hide internal complexity.
-- **Plumbing commands** are low-level tools (`git hash-object`, `git cat-file`) that interact directly with Git's internal data structures and are mostly used for scripting or advanced tasks.
+- Porcelain commands are the user-friendly ones you use daily (`git commit`, `git push`, etc.). They provide a clean, stable interface and hide internal complexity.
+- Plumbing commands are low-level tools (`git hash-object`, `git cat-file`) that interact directly with Git's internal data structures and are mostly used for scripting or advanced tasks.
 
-The names come from a metaphor: **plumbing** is the hidden infrastructure, while **porcelain** is the part you actually interact with.
+The names come from a metaphor: plumbing is the hidden infrastructure, while porcelain is the part you actually interact with.
 
 ## Configuration
 
@@ -59,10 +59,10 @@ git config set --global init.defaultBranch main
 
 #### Worktree > Local > Global > System
 
-- **System**: applies to all users on the machine
-- **Global**: applies to all repos for the current user (`~/.gitconfig`)
-- **Local**: applies only to the current repo (`.git/config`)
-- **Worktree**: applies to a specific worktree (advanced, rarely used)
+- System: applies to all users on the machine
+- Global: applies to all repos for the current user (`~/.gitconfig`)
+- Local: applies only to the current repo (`.git/config`)
+- Worktree: applies to a specific worktree (advanced, rarely used)
 
 Later config levels override earlier ones (local overrides global, etc.)
 
@@ -355,8 +355,8 @@ src/config.txt      # ignore only this specific path
 
 Key rules:
 
-- Patterns **without** a leading `/` match anywhere in the project
-- Patterns **with** a leading `/` are anchored to the root directory
+- Patterns without a leading `/` match anywhere in the project
+- Patterns with a leading `/` are anchored to the root directory
 - `!` negates a pattern (un-ignores something previously ignored)
 - A `.gitignore` file in a subdirectory applies rules relative to that subdirectory
 
@@ -483,7 +483,7 @@ git reflog
 
 Reflog keeps a log of everywhere HEAD has been — even across branch deletions, rebases, and resets. It's your safety net for recovering "lost" commits.
 
-A **commitish** is any value that resolves to a commit hash. Examples:
+A commitish is any value that resolves to a commit hash. Examples:
 
 - `HEAD` — the current commit
 - `HEAD@{1}` — where HEAD was one move ago (from reflog)
@@ -535,9 +535,9 @@ git commit
 
 ### Resolving Rebase Conflicts with `git checkout`
 
-During a rebase, the meaning of `--ours` and `--theirs` is **flipped** compared to a merge:
+During a rebase, the meaning of `--ours` and `--theirs` is flipped compared to a merge:
 
-- `--ours` refers to the branch you're rebasing **onto** (e.g. `main`)
+- `--ours` refers to the branch you're rebasing onto (e.g. `main`)
 - `--theirs` refers to the branch being replayed (your feature branch)
 
 ```bash
@@ -546,7 +546,7 @@ git add path/to/file
 git rebase --continue
 ```
 
-> Note: Unlike merge conflicts, you do **not** run `git commit` after resolving a rebase conflict — use `git rebase --continue` instead.
+> Note: Unlike merge conflicts, you do not run `git commit` after resolving a rebase conflict — use `git rebase --continue` instead.
 
 ## RERERE — Reuse Recorded Resolution
 
@@ -574,7 +574,7 @@ git rebase -i HEAD~n
 
 `n` is the number of commits to squash. An interactive editor opens with each commit listed as `pick`.
 
-- Keep the **first** (oldest) commit as `pick`
+- Keep the first (oldest) commit as `pick`
 - Change the rest to `squash` (or `s`)
 - Save and close — a second editor opens to write the combined commit message
 - Keep only the message you want, delete everything else, then save and close
@@ -597,7 +597,7 @@ git stash drop      # delete the most recent stash
 
 ## Revert
 
-Revert creates a **new commit** that undoes the changes from a previous commit, preserving history. Unlike `reset`, it's safe to use on shared/public branches.
+Revert creates a new commit that undoes the changes from a previous commit, preserving history. Unlike `reset`, it's safe to use on shared/public branches.
 
 ```bash
 git revert <commit-hash>
@@ -619,7 +619,7 @@ Useful for pulling in a single bug fix from another branch without taking all it
 
 ## Bisect
 
-Bisect performs a **binary search** through commit history to find which commit introduced a bug.
+Bisect performs a binary search through commit history to find which commit introduced a bug.
 
 #### Manual bisect
 
@@ -641,8 +641,8 @@ git bisect reset                 # exit bisect mode
 
 You can pass a script to `git bisect run` and it will automate the search using the script's exit code:
 
-- Exit `0` → Git marks the commit as **good**
-- Non-zero exit → Git marks the commit as **bad**
+- Exit `0` → Git marks the commit as good
+- Non-zero exit → Git marks the commit as bad
 
 ```bash
 git bisect run ./scripts/bisect.sh
@@ -682,7 +682,7 @@ If `<branch>` is omitted, Git uses the last part of the path as the branch name.
 git worktree add ../my-feature     # creates branch 'my-feature' and directory ../my-feature
 ```
 
-The linked worktree's `.git` is a **file** (not a directory) containing a path back to the main `.git`:
+The linked worktree's `.git` is a file (not a directory) containing a path back to the main `.git`:
 
 ```bash
 cat ../my-feature/.git
@@ -698,7 +698,7 @@ The main worktree tracks linked worktrees in `.git/worktrees/`.
 + my-feature  # currently checked out in a LINKED worktree
 ```
 
-You **cannot** check out a branch in one worktree if it's already checked out in another.
+You cannot check out a branch in one worktree if it's already checked out in another.
 
 #### Remove a linked worktree
 
@@ -707,7 +707,7 @@ git worktree remove <worktree-name>   # removes the directory and the reference
 git worktree prune                    # cleans up references to manually-deleted directories
 ```
 
-> Removing a worktree does **not** delete the branch — it only removes the working directory and its reference in `.git/worktrees/`.
+> Removing a worktree does not delete the branch — it only removes the working directory and its reference in `.git/worktrees/`.
 
 ## Tags
 
@@ -751,6 +751,6 @@ git push origin --delete <tag-name>  # delete from remote
 
 ## Conclusion
 
-That covers pretty much everything I've learnt about Git so far. Obviously this doesn't cover every single feature — Git is massive — but this should be more than enough for day-to-day use and even some advanced workflows. The stuff I found most useful to actually understand (rather than just memorize commands) was how Git stores objects internally (trees, blobs, commits) and the difference between merge and rebase.
+That covers pretty much everything I've learnt about Git so far. Obviously this doesn't cover every single feature. Git is massive but this should be more than enough for day-to-day use and even some advanced workflows. The stuff I found most useful to actually understand (rather than just memorize commands) was how Git stores objects internally (trees, blobs, commits) and the difference between merge and rebase.
 
 I'll keep updating this post if I learn anything new worth adding. If you spot any mistakes or have suggestions, feel free to DM me on Twitter.
