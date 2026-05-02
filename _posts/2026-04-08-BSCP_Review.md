@@ -2,7 +2,7 @@
 title: My BSCP experience - tips and tricks
 date: 2026-04-08 10:30:00 + 05:30
 categories: ["2026",Web, BSCP]
-tags: ["2026", BSCP]
+tags: ["2026", bscp]
 description: My journey from web security noob to passing Portswigger's BSCP certification, with practical exam tips and lessons learned.
 ---
 
