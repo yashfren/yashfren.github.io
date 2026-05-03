@@ -1,6 +1,6 @@
 ---
 title: Git & GitHub Cheatsheet
-date: 2026-05-03 1:00:00 + 05:30
+date: 2026-05-02 1:00:00 + 05:30
 categories: [Cheatsheet]
 tags: [git, github, cheatsheet]
 description: A comprehensive Git and GitHub cheatsheet covering everything from setup to advanced features like bisect, worktrees, and interactive rebase.
